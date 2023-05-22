@@ -6,4 +6,3 @@ src-git-full backspace https://github.com/bkspc/packages.git
 src-git-full 3ginfo https://github.com/bkspc/luci-app-3ginfo-lite.git
 src-git-full modemband https://github.com/bkspc/luci-app-modemband.git
 src-git-full smstooljs https://github.com/4IceG/luci-app-sms-tool-js.git
-
