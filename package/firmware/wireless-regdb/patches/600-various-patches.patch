@@ -1,0 +1,52 @@
+--- a/db.txt	2022-11-22 08:30:16.892870437 +0000
++++ b/db.txt	2022-11-22 08:31:48.832680885 +0000
+@@ -1353,11 +1353,18 @@
+ 	(5735 - 5835 @ 80), (30)
+
+ country PH: DFS-FCC
+-	(2402 - 2482 @ 40), (20)
+-	(5170 - 5250 @ 80), (17), AUTO-BW
+-	(5250 - 5330 @ 80), (24), DFS, AUTO-BW
+-	(5490 - 5730 @ 160), (24), DFS
+-	(5735 - 5835 @ 80), (30)
++	# https://ntc.gov.ph/wp-content/uploads/2015/10/LawsRulesRegulations/MemoCirculars/MC2003/MC-09-09-2003.pdf
++	# https://ntc.gov.ph/wp-content/uploads/2015/10/LawsRulesRegulations/MemoCirculars/MC2013/MC-03-08-2013.pdf
++	# https://ntc.gov.ph/wp-content/uploads/2022/mc/Memorandum_Cicurlar_No._002-09-2021.pdf
++	# https://ntc.gov.ph/wp-content/uploads/2016/MC/Explanatory-MC-No-01-01-2016.pdf
++	(915 - 918 @ 2), (30)
++	(2400 - 2483.5 @ 40), (30)
++	(5150 - 5250 @ 80), (30), AUTO-BW
++	(5250 - 5350 @ 80), (30), DFS, AUTO-BW
++	(5470 - 5730 @ 160), (30), DFS
++	(5730 - 5895 @ 80), (30)
++	(5925 - 7125 @ 320), (30)
++	(57000 - 66000 @ 2160), (40)
+
+ country PK: DFS-JP
+ 	# https://fab.gov.pk/type-approval/
+@@ -1723,20 +1730,20 @@
+ 	(920 - 928 @ 8), (30)
+ 	(2400 - 2472 @ 40), (30)
+ 	# 5.15 ~ 5.25 GHz: 30 dBm for master mode, 23 dBm for clients
+-	(5150 - 5250 @ 80), (23), AUTO-BW
+-	(5250 - 5350 @ 80), (24), DFS, AUTO-BW
++	(5150 - 5250 @ 80), (30), AUTO-BW
++	(5250 - 5350 @ 80), (30), DFS, AUTO-BW
+ 	# This range ends at 5725 MHz, but channel 144 extends to 5730 MHz.
+ 	# Since 5725 ~ 5730 MHz belongs to the next range which has looser
+ 	# requirements, we can extend the range by 5 MHz to make the kernel
+ 	# happy and be able to use channel 144.
+-	(5470 - 5730 @ 160), (24), DFS
++	(5470 - 5730 @ 160), (30), DFS
+ 	(5730 - 5850 @ 80), (30), AUTO-BW
+ 	# https://www.federalregister.gov/documents/2021/05/03/2021-08802/use-of-the-5850-5925-ghz-band
+ 	# max. 33 dBm AP @ 20MHz, 36 dBm AP @ 40Mhz+, 6 dB less for clients
+-	(5850 - 5895 @ 40), (27), NO-OUTDOOR, AUTO-BW, NO-IR
++	(5850 - 5895 @ 80), (30), AUTO-BW
+ 	# 6g band
+ 	# https://www.federalregister.gov/documents/2020/05/26/2020-11236/unlicensed-use-of-the-6ghz-band
+-	(5925 - 7125 @ 320), (12), NO-OUTDOOR, NO-IR
++	(5925 - 7125 @ 320), (30)
+ 	# 60g band
+ 	# reference: section IV-D https://docs.fcc.gov/public/attachments/FCC-16-89A1.pdf
+ 	# channels 1-6 EIRP=40dBm(43dBm peak)
