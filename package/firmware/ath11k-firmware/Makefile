@@ -11,7 +11,7 @@ PKG_NAME:=ath11k-firmware
 PKG_SOURCE_DATE:=2023-07-28
 PKG_SOURCE_VERSION:=006a4e2a23a6cf9e7a28d8349025a4418e39cb1d
 PKG_MIRROR_HASH:=1043b8c01d28cad2a34e4586e4e6a3949bd1aed9f9afd5b71f527b6b23835e81
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/quic/upstream-wifi-fw.git
@@ -30,6 +30,11 @@ define Package/ath11k-firmware-default
   CATEGORY:=Firmware
   URL:=$(PKG_SOURCE_URL)
   DEPENDS:=
+endef
+
+define Package/ath11k-firmware-ipq6018
+$(Package/ath11k-firmware-default)
+  TITLE:=IPQ6018 ath11k firmware
 endef
 
 define Package/ath11k-firmware-ipq8074
@@ -57,6 +62,13 @@ define Download/qcn9074-board
 endef
 $(eval $(call Download,qcn9074-board))
 
+define Package/ath11k-firmware-ipq6018/install
+	$(INSTALL_DIR) $(1)/lib/firmware/IPQ6018
+	$(INSTALL_DATA) \
+		$(PKG_BUILD_DIR)/ath11k-firmware/IPQ6018/hw1.0/2.7.0.1/WLAN.HK.2.7.0.1-01744-QCAHKSWPL_SILICONZ-1/* \
+		$(1)/lib/firmware/IPQ6018/
+endef
+
 define Package/ath11k-firmware-ipq8074/install
 	$(INSTALL_DIR) $(1)/lib/firmware/IPQ8074
 	$(INSTALL_DATA) \
@@ -73,5 +85,6 @@ define Package/ath11k-firmware-qcn9074/install
 		$(DL_DIR)/$(QCN9074_BOARD_FILE) $(1)/lib/firmware/ath11k/QCN9074/hw1.0/board-2.bin
 endef
 
+$(eval $(call BuildPackage,ath11k-firmware-ipq6018))
 $(eval $(call BuildPackage,ath11k-firmware-ipq8074))
 $(eval $(call BuildPackage,ath11k-firmware-qcn9074))
