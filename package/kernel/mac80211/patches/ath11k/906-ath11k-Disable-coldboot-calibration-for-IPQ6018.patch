@@ -1,0 +1,24 @@
+From 6b961e9bd2976fd82d9663c1e8f1125f42c5a076 Mon Sep 17 00:00:00 2001
+From: Robert Marko <robimarko@gmail.com>
+Date: Sun, 28 May 2023 19:20:59 +0200
+Subject: [PATCH] ath11k: Disable coldboot calibration for IPQ6018
+
+IPQ6018 has the same issue as IPQ8074 with coldboot calibration, so disable
+it until its hopefully fixed someday.
+
+Signed-off-by: Robert Marko <robimarko@gmail.com>
+---
+ drivers/net/wireless/ath/ath11k/core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/net/wireless/ath/ath11k/core.c
++++ b/drivers/net/wireless/ath/ath11k/core.c
+@@ -163,7 +163,7 @@ static struct ath11k_hw_params ath11k_hw
+ 		.supports_shadow_regs = false,
+ 		.idle_ps = false,
+ 		.supports_sta_ps = false,
+-		.cold_boot_calib = true,
++		.cold_boot_calib = false,
+ 		.cbcal_restart_fw = true,
+ 		.fw_mem_mode = 0,
+ 		.num_vdevs = 16 + 1,
