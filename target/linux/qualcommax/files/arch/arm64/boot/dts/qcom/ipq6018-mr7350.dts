@@ -1,0 +1,258 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+
+/dts-v1/;
+
+#include "ipq6018.dtsi"
+#include "ipq6018-ess.dtsi"
+#include <dt-bindings/gpio/gpio.h>
+
+/ {
+	model = "Linksys MR7350";
+	compatible = "linksys,mr7350", "qcom,ipq6018";
+
+	aliases {
+		serial0 = &blsp1_uart3;
+		/*
+		 * Aliases as required by u-boot
+		 * to patch MAC addresses
+		 */
+		ethernet0 = &dp1;
+		ethernet1 = &dp2;
+		ethernet2 = &dp3;
+		ethernet3 = &dp4;
+		ethernet4 = &dp5;
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+};
+
+&tlmm {
+	i2c_1_pins: i2c-1-state {
+		pins = "gpio42", "gpio43";
+		function = "blsp2_i2c";
+		drive-strength = <8>;
+	};
+
+	mdio_pins: mdio-state {
+		mdc-pins {
+			pins = "gpio64";
+			function = "mdc";
+			drive-strength = <8>;
+			bias-pull-up;
+		};
+
+		mdio-pins {
+			pins = "gpio65";
+			function = "mdio";
+			drive-strength = <8>;
+			bias-pull-up;
+		};
+	};
+
+	usb-power-hog {
+		gpio-hog;
+		gpios = <61 GPIO_ACTIVE_LOW>;
+		output-high;
+		line-name = "usb-power-gpio";
+	};
+};
+
+&blsp1_uart3 {
+	pinctrl-0 = <&serial_3_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+&blsp1_i2c3 {
+	pinctrl-0 = <&i2c_1_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+
+	leds@62 {
+		compatible = "nxp,pca9633";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0x62>;
+
+		nxp,hw-blink;
+
+		red@0 {
+			label = "red";
+			reg = <0>;
+		};
+
+		green@1 {
+			label = "green";
+			reg = <1>;
+		};
+
+		blue@2 {
+			label = "blue";
+			reg = <2>;
+			linux,default-trigger = "default-on";
+		};
+	};
+};
+
+&qpic_bam {
+	status = "okay";
+};
+
+&qpic_nand {
+	status = "okay";
+
+	nand@0 {
+		reg = <0>;
+
+		nand-ecc-strength = <4>;
+		nand-ecc-step-size = <512>;
+		nand-bus-width = <8>;
+
+		partitions {
+			compatible = "qcom,smem-part";
+		};
+	};
+};
+
+&ssphy_0 {
+	status = "okay";
+};
+
+&qusb_phy_0 {
+	status = "okay";
+};
+
+&usb3 {
+	status = "okay";
+};
+
+&mdio {
+	status = "okay";
+
+	pinctrl-0 = <&mdio_pins>;
+	pinctrl-names = "default";
+	reset-gpios = <&tlmm 75 GPIO_ACTIVE_LOW>;
+
+	qca8075_0: ethernet-phy@0 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0>;
+	};
+
+	qca8075_1: ethernet-phy@1 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <1>;
+	};
+
+	qca8075_2: ethernet-phy@2 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <2>;
+	};
+
+	qca8075_3: ethernet-phy@3 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <3>;
+	};
+
+	qca8075_4: ethernet-phy@4 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <4>;
+	};
+};
+
+&switch {
+	switch_cpu_bmp = <0x1>;  /* cpu port bitmap */
+	switch_lan_bmp = <0x1e>; /* lan port bitmap */
+	switch_wan_bmp = <0x20>; /* wan port bitmap */
+	switch_inner_bmp = <0xc0>; /*inner port bitmap*/
+	switch_mac_mode = <0x0>; /* mac mode for uniphy instance0*/
+	switch_mac_mode1 = <0xff>; /* mac mode for uniphy instance1*/
+	switch_mac_mode2 = <0xff>; /* mac mode for uniphy instance2*/
+	qcom,port_phyinfo {
+		port@0 {
+			port_id = <1>;
+			phy_address = <0>;
+		};
+		port@1 {
+			port_id = <2>;
+			phy_address = <1>;
+		};
+		port@2 {
+			port_id = <3>;
+			phy_address = <2>;
+		};
+		port@3 {
+			port_id = <4>;
+			phy_address = <3>;
+		};
+		port@4 {
+			port_id = <5>;
+			phy_address = <4>;
+		};
+	};
+};
+
+&soc {
+	dp1: dp1 {
+		device_type = "network";
+		compatible = "qcom,nss-dp";
+		qcom,id = <1>;
+		reg = <0x0 0x3a001000 0x0 0x200>;
+		qcom,mactype = <0>;
+		local-mac-address = [000000000000];
+		phy-handle = <&qca8075_0>;
+		phy-mode = "sgmii";
+	};
+
+	dp2: dp2 {
+		device_type = "network";
+		compatible = "qcom,nss-dp";
+		qcom,id = <2>;
+		reg = <0x0 0x3a001200 0x0 0x200>;
+		qcom,mactype = <0>;
+		local-mac-address = [000000000000];
+		phy-handle = <&qca8075_1>;
+		phy-mode = "sgmii";
+	};
+
+	dp3: dp3 {
+		device_type = "network";
+		compatible = "qcom,nss-dp";
+		qcom,id = <3>;
+		reg = <0x0 0x3a001400 0x0 0x200>;
+		qcom,mactype = <0>;
+		local-mac-address = [000000000000];
+		phy-handle = <&qca8075_2>;
+		phy-mode = "sgmii";
+	};
+
+	dp4: dp4 {
+		device_type = "network";
+		compatible = "qcom,nss-dp";
+		qcom,id = <4>;
+		reg = <0x0 0x3a001600 0x0 0x200>;
+		qcom,mactype = <0>;
+		local-mac-address = [000000000000];
+		phy-handle = <&qca8075_3>;
+		phy-mode = "sgmii";
+	};
+
+	dp5: dp5 {
+		device_type = "network";
+		compatible = "qcom,nss-dp";
+		qcom,id = <5>;
+		reg = <0x0 0x3a001800 0x0 0x200>;
+		qcom,mactype = <0>;
+		local-mac-address = [000000000000];
+		phy-handle = <&qca8075_4>;
+		phy-mode = "sgmii";
+	};
+};
+
+&wifi {
+	status = "okay";
+
+	qcom,ath11k-calibration-variant = "Linksys-MR7350";
+	qcom,ath11k-fw-memory-mode = <1>;
+};
