@@ -896,6 +896,9 @@ config BUSYBOX_DEFAULT_BB_ARCH
 config BUSYBOX_DEFAULT_UNIQ
 	bool
 	default y
+config BUSYBOX_DEFAULT_BASE64
+	bool
+	default y
 config BUSYBOX_DEFAULT_UNLINK
 	bool
 	default n
