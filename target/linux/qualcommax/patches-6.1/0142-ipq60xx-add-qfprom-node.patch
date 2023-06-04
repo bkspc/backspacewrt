@@ -1,0 +1,36 @@
+
+m 9575411435294e2599254985038b371400c231d1 Mon Sep 17 00:00:00 2001
+From: Kathiravan T <quic_kathirav@quicinc.com>
+Date: Fri, 26 May 2023 18:23:04 +0530
+Subject: [PATCH] arm64: dts: qcom: ipq6018: add QFPROM node
+
+IPQ6018 has efuse region to determine the various HW quirks. Lets
+add the initial support and the individual fuses will be added as they
+are required.
+
+Signed-off-by: Kathiravan T <quic_kathirav@quicinc.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@linaro.org>
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+---
+ arch/arm64/boot/dts/qcom/ipq6018.dtsi | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
+index fc64a5efbe2c1b..262babd03f4423 100644
+--- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
+@@ -313,6 +313,13 @@
+ 			status = "disabled";
+ 		};
+ 
++		qfprom: efuse@a4000 {
++			compatible = "qcom,ipq6018-qfprom", "qcom,qfprom";
++			reg = <0x0 0x000a4000 0x0 0x2000>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++		};
++
+ 		prng: qrng@e1000 {
+ 			compatible = "qcom,prng-ee";
+ 			reg = <0x0 0x000e3000 0x0 0x1000>;
+
