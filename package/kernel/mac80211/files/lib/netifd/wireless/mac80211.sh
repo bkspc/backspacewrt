@@ -288,7 +288,6 @@ mac80211_hostapd_setup_base() {
 		esac
 		[ -n "$op_class" ] && append base_cfg "op_class=$op_class" "$N"
 	}
-	[ "$hwmode" = "a" ] || enable_ac=0
 
 	if [ "$enable_ac" != "0" ]; then
 		json_get_vars \
