@@ -3,12 +3,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mold
-PKG_VERSION:=1.11.0
+PKG_VERSION:=2.0.0
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL_FILE:=v$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/rui314/mold/archive/refs/tags
-PKG_HASH:=99318eced81b09a77e4c657011076cc8ec3d4b6867bd324b8677974545bc4d6f
+PKG_HASH:=2ae8a22db09cbff626df74c945079fa29c1e5f60bbe02502dcf69191cf43527b
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
