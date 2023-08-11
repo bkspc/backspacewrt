@@ -1,8 +1,9 @@
+src-git backspace https://github.com/bkspc/packages.git
 src-git packages https://github.com/openwrt/packages.git
 src-git luci https://github.com/openwrt/luci.git
 src-git routing https://github.com/openwrt/routing.git
 src-git telephony https://github.com/openwrt/telephony.git
-src-git-full backspace https://github.com/bkspc/packages.git
+src-git openmptcprouter https://github.com/Ysurac/openmptcprouter-feeds.git
 src-git-full 3ginfo https://github.com/bkspc/luci-app-3ginfo-lite.git
 src-git-full modemband https://github.com/bkspc/luci-app-modemband.git
 src-git-full smstooljs https://github.com/4IceG/luci-app-sms-tool-js.git
