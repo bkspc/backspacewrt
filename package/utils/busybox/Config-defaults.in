@@ -911,9 +911,6 @@ config BUSYBOX_DEFAULT_UUDECODE
 config BUSYBOX_DEFAULT_BASE32
 	bool
 	default n
-config BUSYBOX_DEFAULT_BASE64
-	bool
-	default n
 config BUSYBOX_DEFAULT_UUENCODE
 	bool
 	default n
