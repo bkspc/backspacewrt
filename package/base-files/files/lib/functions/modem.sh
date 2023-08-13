@@ -55,11 +55,6 @@ setup_ip_passthrough() {
   ip rule add iif ${bridge_device} lookup ${wan_table} pref 10000
   sysctl net.ipv4.conf.${bridge_device}.proxy_arp=1
 
-  nft insert rule inet fw4 forward iifname ${wan_device} oifname ${bridge_device} accept
-  nft insert rule inet fw4 forward iifname ${bridge_device} oifname ${wan_device} accept
-  nft insert rule inet fw4 input iifname ${wan_device} accept
-  nft insert rule inet fw4 input iifname ${bridge_device} accept
-
   # POSTROUTING is not overriden by the nft chain so lets keep using iptables
   iptables -t nat -I POSTROUTING -o ${wan_device} -j ACCEPT
 
