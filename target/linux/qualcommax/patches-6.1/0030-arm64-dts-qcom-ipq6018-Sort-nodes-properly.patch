@@ -12,11 +12,9 @@ Link: https://lore.kernel.org/r/20230102094642.74254-4-konrad.dybcio@linaro.org
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 518 +++++++++++++-------------
  1 file changed, 260 insertions(+), 258 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 332a183c366f..8937b10748f3 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -87,6 +87,12 @@ L2_0: l2-cache {
+@@ -87,6 +87,12 @@
  		};
  	};
  
@@ -29,7 +27,7 @@ index 332a183c366f..8937b10748f3 100644
  	cpu_opp_table: opp-table-cpu {
  		compatible = "operating-points-v2";
  		opp-shared;
-@@ -123,12 +129,6 @@ opp-1800000000 {
+@@ -123,12 +129,6 @@
  		};
  	};
  
@@ -42,7 +40,7 @@ index 332a183c366f..8937b10748f3 100644
  	pmuv8: pmu {
  		compatible = "arm,cortex-a53-pmu";
  		interrupts = <GIC_PPI 7 (GIC_CPU_MASK_SIMPLE(4) |
-@@ -166,6 +166,28 @@ q6_region: memory@4ab00000 {
+@@ -166,6 +166,28 @@
  		};
  	};
  
@@ -71,7 +69,7 @@ index 332a183c366f..8937b10748f3 100644
  	smem {
  		compatible = "qcom,smem";
  		memory-region = <&smem_region>;
-@@ -179,6 +201,102 @@ soc: soc {
+@@ -179,6 +201,102 @@
  		dma-ranges;
  		compatible = "simple-bus";
  
@@ -174,7 +172,7 @@ index 332a183c366f..8937b10748f3 100644
  		prng: qrng@e1000 {
  			compatible = "qcom,prng-ee";
  			reg = <0x0 0x000e3000 0x0 0x1000>;
-@@ -257,6 +375,41 @@ tcsr: syscon@1937000 {
+@@ -257,6 +375,41 @@
  			reg = <0x0 0x01937000 0x0 0x21000>;
  		};
  
@@ -216,7 +214,7 @@ index 332a183c366f..8937b10748f3 100644
  		blsp_dma: dma-controller@7884000 {
  			compatible = "qcom,bam-v1.7.0";
  			reg = <0x0 0x07884000 0x0 0x2b000>;
-@@ -366,6 +519,49 @@ qpic_nand: nand-controller@79b0000 {
+@@ -366,6 +519,49 @@
  			status = "disabled";
  		};
  
@@ -266,7 +264,7 @@ index 332a183c366f..8937b10748f3 100644
  		intc: interrupt-controller@b000000 {
  			compatible = "qcom,msm-qgic2";
  			#address-cells = <2>;
-@@ -386,105 +582,6 @@ v2m@0 {
+@@ -386,105 +582,6 @@
  			};
  		};
  
@@ -372,7 +370,7 @@ index 332a183c366f..8937b10748f3 100644
  		watchdog@b017000 {
  			compatible = "qcom,kpss-wdt";
  			interrupts = <GIC_SPI 3 IRQ_TYPE_EDGE_RISING>;
-@@ -617,147 +714,74 @@ qrtr_requests {
+@@ -617,147 +714,74 @@
  			};
  		};
  
@@ -578,7 +576,7 @@ index 332a183c366f..8937b10748f3 100644
  		};
  	};
  
-@@ -792,26 +816,4 @@ wcss_smp2p_in: slave-kernel {
+@@ -792,26 +816,4 @@
  			#interrupt-cells = <2>;
  		};
  	};
@@ -605,6 +603,3 @@ index 332a183c366f..8937b10748f3 100644
 -		};
 -	};
  };
--- 
-2.40.1
-

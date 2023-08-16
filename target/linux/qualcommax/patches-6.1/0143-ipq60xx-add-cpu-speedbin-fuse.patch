@@ -12,11 +12,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 5 +++++
  1 file changed, 5 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 262babd03f4423..aad413e0c6fbcd 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -318,6 +318,11 @@
+@@ -307,6 +307,11 @@
  			reg = <0x0 0x000a4000 0x0 0x2000>;
  			#address-cells = <1>;
  			#size-cells = <1>;
@@ -28,4 +26,3 @@ index 262babd03f4423..aad413e0c6fbcd 100644
  		};
  
  		prng: qrng@e1000 {
-

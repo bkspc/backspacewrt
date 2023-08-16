@@ -12,11 +12,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 9 ++++++++-
  1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 943cb2eab84c89..e92654b7fb2f7f 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -96,42 +96,49 @@
+@@ -95,42 +95,49 @@
  	};
  
  	cpu_opp_table: opp-table-cpu {

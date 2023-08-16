@@ -13,11 +13,9 @@ Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
  drivers/clk/qcom/gcc-ipq6018.c | 619 ++++++++++++++++++++++++++++++++-
  1 file changed, 603 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/clk/qcom/gcc-ipq6018.c b/drivers/clk/qcom/gcc-ipq6018.c
-index cf11c9aa5004..086a7052cb58 100644
 --- a/drivers/clk/qcom/gcc-ipq6018.c
 +++ b/drivers/clk/qcom/gcc-ipq6018.c
-@@ -223,6 +223,19 @@ static struct clk_rcg2 pcnoc_bfdcd_clk_src = {
+@@ -217,6 +217,19 @@ static struct clk_rcg2 pcnoc_bfdcd_clk_s
  	},
  };
  
@@ -37,7 +35,7 @@ index cf11c9aa5004..086a7052cb58 100644
  static struct clk_alpha_pll gpll2_main = {
  	.offset = 0x4a000,
  	.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_DEFAULT],
-@@ -505,6 +518,19 @@ static struct clk_rcg2 snoc_nssnoc_bfdcd_clk_src = {
+@@ -497,6 +510,19 @@ static struct clk_rcg2 snoc_nssnoc_bfdcd
  	},
  };
  
@@ -57,7 +55,7 @@ index cf11c9aa5004..086a7052cb58 100644
  static const struct freq_tbl ftbl_apss_ahb_clk_src[] = {
  	F(24000000, P_XO, 1, 0, 0),
  	F(25000000, P_GPLL0_DIV2, 16, 0, 0),
-@@ -1909,6 +1935,19 @@ static struct clk_rcg2 system_noc_bfdcd_clk_src = {
+@@ -1897,6 +1923,19 @@ static struct clk_rcg2 system_noc_bfdcd_
  	},
  };
  
@@ -77,7 +75,7 @@ index cf11c9aa5004..086a7052cb58 100644
  static const struct freq_tbl ftbl_ubi32_mem_noc_bfdcd_clk_src[] = {
  	F(24000000, P_XO, 1, 0, 0),
  	F(307670000, P_BIAS_PLL_NSS_NOC, 1.5, 0, 0),
-@@ -1944,6 +1983,19 @@ static struct clk_rcg2 ubi32_mem_noc_bfdcd_clk_src = {
+@@ -1932,6 +1971,19 @@ static struct clk_rcg2 ubi32_mem_noc_bfd
  	},
  };
  
@@ -97,7 +95,7 @@ index cf11c9aa5004..086a7052cb58 100644
  static struct clk_branch gcc_apss_axi_clk = {
  	.halt_reg = 0x46020,
  	.halt_check = BRANCH_HALT_VOTED,
-@@ -2138,6 +2190,22 @@ static struct clk_branch gcc_blsp1_qup5_spi_apps_clk = {
+@@ -2126,6 +2178,22 @@ static struct clk_branch gcc_blsp1_qup5_
  	},
  };
  
@@ -120,7 +118,7 @@ index cf11c9aa5004..086a7052cb58 100644
  static struct clk_branch gcc_blsp1_qup6_spi_apps_clk = {
  	.halt_reg = 0x0700c,
  	.clkr = {
-@@ -2681,6 +2749,454 @@ static struct clk_rcg2 lpass_q6_axim_clk_src = {
+@@ -2669,6 +2737,454 @@ static struct clk_rcg2 lpass_q6_axim_clk
  	},
  };
  
@@ -575,7 +573,7 @@ index cf11c9aa5004..086a7052cb58 100644
  static struct freq_tbl ftbl_rbcpr_wcss_clk_src[] = {
  	F(24000000, P_XO, 1, 0, 0),
  	F(50000000, P_GPLL0, 16, 0, 0),
-@@ -2700,6 +3216,23 @@ static struct clk_rcg2 rbcpr_wcss_clk_src = {
+@@ -2688,6 +3204,23 @@ static struct clk_rcg2 rbcpr_wcss_clk_sr
  	},
  };
  
@@ -599,7 +597,7 @@ index cf11c9aa5004..086a7052cb58 100644
  static struct clk_branch gcc_lpass_core_axim_clk = {
  	.halt_reg = 0x1F028,
  	.clkr = {
-@@ -3522,6 +4055,22 @@ static struct clk_branch gcc_prng_ahb_clk = {
+@@ -3509,6 +4042,22 @@ static struct clk_branch gcc_prng_ahb_cl
  	},
  };
  
@@ -622,7 +620,7 @@ index cf11c9aa5004..086a7052cb58 100644
  static struct clk_branch gcc_qdss_dap_clk = {
  	.halt_reg = 0x29084,
  	.clkr = {
-@@ -4195,6 +4744,9 @@ static struct clk_hw *gcc_ipq6018_hws[] = {
+@@ -4182,6 +4731,9 @@ static struct clk_hw *gcc_ipq6018_hws[]
  	&gpll6_out_main_div2.hw,
  	&qdss_dap_sync_clk_src.hw,
  	&qdss_tsctr_div2_clk_src.hw,
@@ -632,7 +630,7 @@ index cf11c9aa5004..086a7052cb58 100644
  };
  
  static struct clk_regmap *gcc_ipq6018_clks[] = {
-@@ -4292,6 +4844,7 @@ static struct clk_regmap *gcc_ipq6018_clks[] = {
+@@ -4279,6 +4831,7 @@ static struct clk_regmap *gcc_ipq6018_cl
  	[GCC_BLSP1_QUP4_SPI_APPS_CLK] = &gcc_blsp1_qup4_spi_apps_clk.clkr,
  	[GCC_BLSP1_QUP5_I2C_APPS_CLK] = &gcc_blsp1_qup5_i2c_apps_clk.clkr,
  	[GCC_BLSP1_QUP5_SPI_APPS_CLK] = &gcc_blsp1_qup5_spi_apps_clk.clkr,
@@ -640,7 +638,7 @@ index cf11c9aa5004..086a7052cb58 100644
  	[GCC_BLSP1_QUP6_SPI_APPS_CLK] = &gcc_blsp1_qup6_spi_apps_clk.clkr,
  	[GCC_BLSP1_UART1_APPS_CLK] = &gcc_blsp1_uart1_apps_clk.clkr,
  	[GCC_BLSP1_UART2_APPS_CLK] = &gcc_blsp1_uart2_apps_clk.clkr,
-@@ -4357,6 +4910,7 @@ static struct clk_regmap *gcc_ipq6018_clks[] = {
+@@ -4344,6 +4897,7 @@ static struct clk_regmap *gcc_ipq6018_cl
  	[GCC_SYS_NOC_PCIE0_AXI_CLK] = &gcc_sys_noc_pcie0_axi_clk.clkr,
  	[GCC_PCIE0_PIPE_CLK] = &gcc_pcie0_pipe_clk.clkr,
  	[GCC_PRNG_AHB_CLK] = &gcc_prng_ahb_clk.clkr,
@@ -648,7 +646,7 @@ index cf11c9aa5004..086a7052cb58 100644
  	[GCC_QDSS_DAP_CLK] = &gcc_qdss_dap_clk.clkr,
  	[GCC_QPIC_AHB_CLK] = &gcc_qpic_ahb_clk.clkr,
  	[GCC_QPIC_CLK] = &gcc_qpic_clk.clkr,
-@@ -4398,9 +4952,35 @@ static struct clk_regmap *gcc_ipq6018_clks[] = {
+@@ -4385,9 +4939,35 @@ static struct clk_regmap *gcc_ipq6018_cl
  	[PCIE0_RCHNG_CLK_SRC] = &pcie0_rchng_clk_src.clkr,
  	[GCC_PCIE0_AXI_S_BRIDGE_CLK] = &gcc_pcie0_axi_s_bridge_clk.clkr,
  	[PCIE0_RCHNG_CLK] = &gcc_pcie0_rchng_clk.clkr,
@@ -684,7 +682,7 @@ index cf11c9aa5004..086a7052cb58 100644
  	[GCC_LPASS_CORE_AXIM_CLK] = &gcc_lpass_core_axim_clk.clkr,
  	[LPASS_CORE_AXIM_CLK_SRC] = &lpass_core_axim_clk_src.clkr,
  	[GCC_LPASS_SNOC_CFG_CLK] = &gcc_lpass_snoc_cfg_clk.clkr,
-@@ -4416,6 +4996,9 @@ static struct clk_regmap *gcc_ipq6018_clks[] = {
+@@ -4403,6 +4983,9 @@ static struct clk_regmap *gcc_ipq6018_cl
  	[GCC_MEM_NOC_UBI32_CLK] = &gcc_mem_noc_ubi32_clk.clkr,
  	[GCC_MEM_NOC_LPASS_CLK] = &gcc_mem_noc_lpass_clk.clkr,
  	[GCC_SNOC_LPASS_CFG_CLK] = &gcc_snoc_lpass_cfg_clk.clkr,
@@ -694,48 +692,7 @@ index cf11c9aa5004..086a7052cb58 100644
  	[QDSS_STM_CLK_SRC] = &qdss_stm_clk_src.clkr,
  	[QDSS_TRACECLKIN_CLK_SRC] = &qdss_traceclkin_clk_src.clkr,
  };
-@@ -4528,24 +5111,24 @@ static const struct qcom_reset_map gcc_ipq6018_resets[] = {
- 	[GCC_PCIE0_AHB_ARES] = { 0x75040, 5 },
- 	[GCC_PCIE0_AXI_MASTER_STICKY_ARES] = { 0x75040, 6 },
- 	[GCC_PCIE0_AXI_SLAVE_STICKY_ARES] = { 0x75040, 7 },
--	[GCC_PPE_FULL_RESET] = { 0x68014, 0 },
--	[GCC_UNIPHY0_SOFT_RESET] = { 0x56004, 0 },
-+	[GCC_PPE_FULL_RESET] = { .reg = 0x68014, .bitmask = 0xf0000},
-+	[GCC_UNIPHY0_SOFT_RESET] = { .reg = 0x56004, .bitmask = 0x3ff2},
- 	[GCC_UNIPHY0_XPCS_RESET] = { 0x56004, 2 },
--	[GCC_UNIPHY1_SOFT_RESET] = { 0x56104, 0 },
-+	[GCC_UNIPHY1_SOFT_RESET] = { .reg = 0x56104, .bitmask = 0x32},
- 	[GCC_UNIPHY1_XPCS_RESET] = { 0x56104, 2 },
--	[GCC_EDMA_HW_RESET] = { 0x68014, 0 },
--	[GCC_NSSPORT1_RESET] = { 0x68014, 0 },
--	[GCC_NSSPORT2_RESET] = { 0x68014, 0 },
--	[GCC_NSSPORT3_RESET] = { 0x68014, 0 },
--	[GCC_NSSPORT4_RESET] = { 0x68014, 0 },
--	[GCC_NSSPORT5_RESET] = { 0x68014, 0 },
--	[GCC_UNIPHY0_PORT1_ARES] = { 0x56004, 0 },
--	[GCC_UNIPHY0_PORT2_ARES] = { 0x56004, 0 },
--	[GCC_UNIPHY0_PORT3_ARES] = { 0x56004, 0 },
--	[GCC_UNIPHY0_PORT4_ARES] = { 0x56004, 0 },
--	[GCC_UNIPHY0_PORT5_ARES] = { 0x56004, 0 },
--	[GCC_UNIPHY0_PORT_4_5_RESET] = { 0x56004, 0 },
--	[GCC_UNIPHY0_PORT_4_RESET] = { 0x56004, 0 },
-+	[GCC_EDMA_HW_RESET] = { .reg = 0x68014, .bitmask = 0x300000},
-+	[GCC_NSSPORT1_RESET] = { .reg = 0x68014, .bitmask = 0x1000003},
-+	[GCC_NSSPORT2_RESET] = { .reg = 0x68014, .bitmask = 0x200000c},
-+	[GCC_NSSPORT3_RESET] = { .reg = 0x68014, .bitmask = 0x4000030},
-+	[GCC_NSSPORT4_RESET] = { .reg = 0x68014, .bitmask = 0x8000300},
-+	[GCC_NSSPORT5_RESET] = { .reg = 0x68014, .bitmask = 0x10000c00},
-+	[GCC_UNIPHY0_PORT1_ARES] = { .reg = 0x56004, .bitmask = 0x30},
-+	[GCC_UNIPHY0_PORT2_ARES] = { .reg = 0x56004, .bitmask = 0xc0},
-+	[GCC_UNIPHY0_PORT3_ARES] = { .reg = 0x56004, .bitmask = 0x300},
-+	[GCC_UNIPHY0_PORT4_ARES] = { .reg = 0x56004, .bitmask = 0xc00},
-+	[GCC_UNIPHY0_PORT5_ARES] = { .reg = 0x56004, .bitmask = 0x3000},
-+	[GCC_UNIPHY0_PORT_4_5_RESET] = { .reg = 0x56004, .bitmask = 0x3c02},
-+	[GCC_UNIPHY0_PORT_4_RESET] = { .reg = 0x56004, .bitmask = 0xc02},
- 	[GCC_LPASS_BCR] = {0x1F000, 0},
- 	[GCC_UBI32_TBU_BCR] = {0x65000, 0},
- 	[GCC_LPASS_TBU_BCR] = {0x6C000, 0},
-@@ -4597,6 +5180,10 @@ static const struct qcom_cc_desc gcc_ipq6018_desc = {
+@@ -4584,6 +5167,10 @@ static const struct qcom_cc_desc gcc_ipq
  static int gcc_ipq6018_probe(struct platform_device *pdev)
  {
  	struct regmap *regmap;
@@ -746,7 +703,3 @@ index cf11c9aa5004..086a7052cb58 100644
  
  	regmap = qcom_cc_map(pdev, &gcc_ipq6018_desc);
  	if (IS_ERR(regmap))
--- 
-2.37.1
-
-

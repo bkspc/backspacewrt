@@ -11,11 +11,9 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 115 ++++++++++++++++++++++++++
  1 file changed, 115 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index f531797f2619..239ed9bfbdc2 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -782,6 +782,121 @@ pcie0: pci@20000000 {
+@@ -782,6 +782,121 @@
  
  			status = "disabled";
  		};
@@ -137,6 +135,3 @@ index f531797f2619..239ed9bfbdc2 100644
  	};
  
  	timer {
--- 
-2.40.1
-

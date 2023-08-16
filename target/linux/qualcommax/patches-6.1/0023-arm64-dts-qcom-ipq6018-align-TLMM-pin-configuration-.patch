@@ -17,11 +17,9 @@ Link: https://lore.kernel.org/r/20221006124659.217540-3-krzysztof.kozlowski@lina
  arch/arm64/boot/dts/qcom/ipq6018.dtsi        | 4 ++--
  2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018-cp01-c1.dts b/arch/arm64/boot/dts/qcom/ipq6018-cp01-c1.dts
-index 6a716c83e5f1..ec999f972360 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018-cp01-c1.dts
 +++ b/arch/arm64/boot/dts/qcom/ipq6018-cp01-c1.dts
-@@ -51,13 +51,13 @@ flash@0 {
+@@ -51,13 +51,13 @@
  };
  
  &tlmm {
@@ -37,11 +35,9 @@ index 6a716c83e5f1..ec999f972360 100644
  		pins = "gpio38", "gpio39", "gpio40", "gpio41";
  		function = "blsp0_spi";
  		drive-strength = <8>;
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index c3492a383155..d15e6f22b881 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -218,14 +218,14 @@ tlmm: pinctrl@1000000 {
+@@ -218,14 +218,14 @@
  			interrupt-controller;
  			#interrupt-cells = <2>;
  
@@ -58,6 +54,3 @@ index c3492a383155..d15e6f22b881 100644
  				pins = "gpio1", "gpio3", "gpio4",
  					"gpio5", "gpio6", "gpio7",
  					"gpio8", "gpio10", "gpio11",
--- 
-2.40.1
-

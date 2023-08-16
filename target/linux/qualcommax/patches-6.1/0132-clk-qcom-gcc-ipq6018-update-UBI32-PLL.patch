@@ -13,7 +13,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 
 --- a/drivers/clk/qcom/gcc-ipq6018.c
 +++ b/drivers/clk/qcom/gcc-ipq6018.c
-@@ -4149,15 +4149,20 @@ static struct clk_branch gcc_dcc_clk = {
+@@ -4698,15 +4698,20 @@ static struct clk_branch gcc_dcc_clk = {
  
  static const struct alpha_pll_config ubi32_pll_config = {
  	.l = 0x3e,

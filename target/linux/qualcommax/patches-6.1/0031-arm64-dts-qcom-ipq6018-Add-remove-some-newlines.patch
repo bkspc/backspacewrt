@@ -15,11 +15,9 @@ Link: https://lore.kernel.org/r/20230102094642.74254-5-konrad.dybcio@linaro.org
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 26 ++++++++++++--------------
  1 file changed, 12 insertions(+), 14 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 8937b10748f3..0d9074b3b1a2 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -102,26 +102,31 @@ opp-864000000 {
+@@ -102,26 +102,31 @@
  			opp-microvolt = <725000>;
  			clock-latency-ns = <200000>;
  		};
@@ -51,7 +49,7 @@ index 8937b10748f3..0d9074b3b1a2 100644
  		opp-1800000000 {
  			opp-hz = /bits/ 64 <1800000000>;
  			opp-microvolt = <1062500>;
-@@ -131,8 +136,7 @@ opp-1800000000 {
+@@ -131,8 +136,7 @@
  
  	pmuv8: pmu {
  		compatible = "arm,cortex-a53-pmu";
@@ -61,7 +59,7 @@ index 8937b10748f3..0d9074b3b1a2 100644
  	};
  
  	psci: psci {
-@@ -734,24 +738,18 @@ pcie0: pci@20000000 {
+@@ -734,24 +738,18 @@
  			phys = <&pcie_phy0>;
  			phy-names = "pciephy";
  
@@ -92,6 +90,3 @@ index 8937b10748f3..0d9074b3b1a2 100644
  
  			clocks = <&gcc GCC_SYS_NOC_PCIE0_AXI_CLK>,
  				 <&gcc GCC_PCIE0_AXI_M_CLK>,
--- 
-2.40.1
-

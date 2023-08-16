@@ -15,11 +15,9 @@ Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index fc64a5efbe2c1b..262babd03f4423 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -313,6 +313,13 @@
+@@ -302,6 +302,13 @@
  			status = "disabled";
  		};
  
@@ -33,4 +31,3 @@ index fc64a5efbe2c1b..262babd03f4423 100644
  		prng: qrng@e1000 {
  			compatible = "qcom,prng-ee";
  			reg = <0x0 0x000e3000 0x0 0x1000>;
-

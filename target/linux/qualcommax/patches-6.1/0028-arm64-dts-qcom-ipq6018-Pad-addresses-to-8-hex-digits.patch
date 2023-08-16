@@ -12,11 +12,9 @@ Link: https://lore.kernel.org/r/20230102094642.74254-2-konrad.dybcio@linaro.org
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 24 ++++++++++++------------
  1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 89e154bd5b37..e5e2f41b9832 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -146,7 +146,7 @@ reserved-memory {
+@@ -146,7 +146,7 @@
  		ranges;
  
  		rpm_msg_ram: memory@60000 {
@@ -25,7 +23,7 @@ index 89e154bd5b37..e5e2f41b9832 100644
  			no-map;
  		};
  
-@@ -181,7 +181,7 @@ soc: soc {
+@@ -181,7 +181,7 @@
  
  		prng: qrng@e1000 {
  			compatible = "qcom,prng-ee";
@@ -34,7 +32,7 @@ index 89e154bd5b37..e5e2f41b9832 100644
  			clocks = <&gcc GCC_PRNG_AHB_CLK>;
  			clock-names = "core";
  		};
-@@ -388,7 +388,7 @@ v2m@0 {
+@@ -388,7 +388,7 @@
  
  		pcie_phy: phy@84000 {
  			compatible = "qcom,ipq6018-qmp-pcie-phy";
@@ -43,7 +41,7 @@ index 89e154bd5b37..e5e2f41b9832 100644
  			status = "disabled";
  			#address-cells = <2>;
  			#size-cells = <2>;
-@@ -404,10 +404,10 @@ pcie_phy: phy@84000 {
+@@ -404,10 +404,10 @@
  				      "common";
  
  			pcie_phy0: phy@84200 {
@@ -58,7 +56,7 @@ index 89e154bd5b37..e5e2f41b9832 100644
  				#phy-cells = <0>;
  
  				clocks = <&gcc GCC_PCIE0_PIPE_CLK>;
-@@ -621,7 +621,7 @@ mdio: mdio@90000 {
+@@ -621,7 +621,7 @@
  			#address-cells = <1>;
  			#size-cells = <0>;
  			compatible = "qcom,ipq6018-mdio", "qcom,ipq4019-mdio";
@@ -67,7 +65,7 @@ index 89e154bd5b37..e5e2f41b9832 100644
  			clocks = <&gcc GCC_MDIO_AHB_CLK>;
  			clock-names = "gcc_mdio_ahb_clk";
  			status = "disabled";
-@@ -629,7 +629,7 @@ mdio: mdio@90000 {
+@@ -629,7 +629,7 @@
  
  		qusb_phy_1: qusb@59000 {
  			compatible = "qcom,ipq6018-qusb2-phy";
@@ -76,7 +74,7 @@ index 89e154bd5b37..e5e2f41b9832 100644
  			#phy-cells = <0>;
  
  			clocks = <&gcc GCC_USB1_PHY_CFG_AHB_CLK>,
-@@ -662,7 +662,7 @@ usb2: usb@70f8800 {
+@@ -662,7 +662,7 @@
  
  			dwc_1: usb@7000000 {
  			       compatible = "snps,dwc3";
@@ -85,7 +83,7 @@ index 89e154bd5b37..e5e2f41b9832 100644
  			       interrupts = <GIC_SPI 99 IRQ_TYPE_LEVEL_HIGH>;
  			       phys = <&qusb_phy_1>;
  			       phy-names = "usb2-phy";
-@@ -677,7 +677,7 @@ dwc_1: usb@7000000 {
+@@ -677,7 +677,7 @@
  
  		ssphy_0: ssphy@78000 {
  			compatible = "qcom,ipq6018-qmp-usb3-phy";
@@ -94,7 +92,7 @@ index 89e154bd5b37..e5e2f41b9832 100644
  			#address-cells = <2>;
  			#size-cells = <2>;
  			ranges;
-@@ -706,7 +706,7 @@ usb0_ssphy: phy@78200 {
+@@ -706,7 +706,7 @@
  
  		qusb_phy_0: qusb@79000 {
  			compatible = "qcom,ipq6018-qusb2-phy";
@@ -103,6 +101,3 @@ index 89e154bd5b37..e5e2f41b9832 100644
  			#phy-cells = <0>;
  
  			clocks = <&gcc GCC_USB0_PHY_CFG_AHB_CLK>,
--- 
-2.40.1
-

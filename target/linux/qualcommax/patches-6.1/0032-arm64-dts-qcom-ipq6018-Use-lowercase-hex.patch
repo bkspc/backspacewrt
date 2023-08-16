@@ -12,11 +12,9 @@ Link: https://lore.kernel.org/r/20230102094642.74254-6-konrad.dybcio@linaro.org
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 0d9074b3b1a2..d32c9b2515ee 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -381,7 +381,7 @@ tcsr: syscon@1937000 {
+@@ -381,7 +381,7 @@
  
  		usb2: usb@70f8800 {
  			compatible = "qcom,ipq6018-dwc3", "qcom,dwc3";
@@ -25,6 +23,3 @@ index 0d9074b3b1a2..d32c9b2515ee 100644
  			#address-cells = <2>;
  			#size-cells = <2>;
  			ranges;
--- 
-2.40.1
-

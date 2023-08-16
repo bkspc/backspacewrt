@@ -18,11 +18,9 @@ Link: https://lore.kernel.org/r/20221103212125.17156-2-ansuelsmth@gmail.com
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 33e94acc44e4..86c6b2a99cad 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -406,7 +406,8 @@ pcie_phy: phy@84000 {
+@@ -406,7 +406,8 @@
  			pcie_phy0: phy@84200 {
  				reg = <0x0 0x84200 0x0 0x16c>, /* Serdes Tx */
  				      <0x0 0x84400 0x0 0x200>, /* Serdes Rx */
@@ -32,6 +30,3 @@ index 33e94acc44e4..86c6b2a99cad 100644
  				#phy-cells = <0>;
  
  				clocks = <&gcc GCC_PCIE0_PIPE_CLK>;
--- 
-2.40.1
-

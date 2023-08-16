@@ -14,11 +14,9 @@ Link: https://lore.kernel.org/r/20230416101134.95686-2-krzysztof.kozlowski@linar
  arch/arm64/boot/dts/qcom/ipq8074.dtsi | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 9ff4e9d45065..ece652a0728a 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -83,7 +83,7 @@ CPU3: cpu@3 {
+@@ -83,7 +83,7 @@
  
  		L2_0: l2-cache {
  			compatible = "cache";
@@ -27,11 +25,9 @@ index 9ff4e9d45065..ece652a0728a 100644
  		};
  	};
  
-diff --git a/arch/arm64/boot/dts/qcom/ipq8074.dtsi b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-index e7d628530ce0..bd5c07e2256f 100644
 --- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
-@@ -66,7 +66,7 @@ CPU3: cpu@3 {
+@@ -66,7 +66,7 @@
  
  		L2_0: l2-cache {
  			compatible = "cache";
@@ -40,6 +36,3 @@ index e7d628530ce0..bd5c07e2256f 100644
  		};
  	};
  
--- 
-2.40.1
-

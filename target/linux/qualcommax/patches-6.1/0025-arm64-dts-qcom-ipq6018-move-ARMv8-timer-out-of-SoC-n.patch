@@ -18,11 +18,9 @@ Link: https://lore.kernel.org/r/20220927201218.1264506-2-robimarko@gmail.com
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 16 ++++++++--------
  1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 4007644ba10c..33e94acc44e4 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -509,14 +509,6 @@ a53pll: clock@b116000 {
+@@ -509,14 +509,6 @@
  			clock-names = "xo";
  		};
  
@@ -37,7 +35,7 @@ index 4007644ba10c..33e94acc44e4 100644
  		timer@b120000 {
  			#address-cells = <1>;
  			#size-cells = <1>;
-@@ -768,6 +760,14 @@ dwc_0: usb@8a00000 {
+@@ -768,6 +760,14 @@
  		};
  	};
  
@@ -52,6 +50,3 @@ index 4007644ba10c..33e94acc44e4 100644
  	wcss: wcss-smp2p {
  		compatible = "qcom,smp2p";
  		qcom,smem = <435>, <428>;
--- 
-2.40.1
-

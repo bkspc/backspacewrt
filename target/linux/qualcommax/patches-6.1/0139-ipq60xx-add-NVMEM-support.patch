@@ -21,20 +21,16 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
  drivers/cpufreq/qcom-cpufreq-nvmem.c | 57 ++++++++++++++++++++++++++++
  2 files changed, 58 insertions(+)
 
-diff --git a/drivers/cpufreq/cpufreq-dt-platdev.c b/drivers/cpufreq/cpufreq-dt-platdev.c
-index e4d6d128647d9c..1f22b5d828c935 100644
 --- a/drivers/cpufreq/cpufreq-dt-platdev.c
 +++ b/drivers/cpufreq/cpufreq-dt-platdev.c
-@@ -168,6 +168,7 @@ static const struct of_device_id blocklist[] __initconst = {
+@@ -163,6 +163,7 @@ static const struct of_device_id blockli
+ 	{ .compatible = "ti,dra7", },
  	{ .compatible = "ti,omap3", },
- 	{ .compatible = "ti,am625", },
  
 +	{ .compatible = "qcom,ipq6018", },
  	{ .compatible = "qcom,ipq8064", },
  	{ .compatible = "qcom,ipq8074", },
  	{ .compatible = "qcom,apq8064", },
-diff --git a/drivers/cpufreq/qcom-cpufreq-nvmem.c b/drivers/cpufreq/qcom-cpufreq-nvmem.c
-index 607fc0273e9cbd..660ca62aa0a9ac 100644
 --- a/drivers/cpufreq/qcom-cpufreq-nvmem.c
 +++ b/drivers/cpufreq/qcom-cpufreq-nvmem.c
 @@ -33,6 +33,7 @@
@@ -45,7 +41,7 @@ index 607fc0273e9cbd..660ca62aa0a9ac 100644
  
  struct qcom_cpufreq_drv;
  
-@@ -239,6 +240,57 @@ static int qcom_cpufreq_ipq8074_name_version(struct device *cpu_dev,
+@@ -242,6 +243,57 @@ static int qcom_cpufreq_ipq8074_name_ver
  	return 0;
  }
  
@@ -103,7 +99,7 @@ index 607fc0273e9cbd..660ca62aa0a9ac 100644
  static const struct qcom_cpufreq_match_data match_data_kryo = {
  	.get_version = qcom_cpufreq_kryo_name_version,
  };
-@@ -253,6 +305,10 @@ static const struct qcom_cpufreq_match_data match_data_qcs404 = {
+@@ -256,6 +308,10 @@ static const struct qcom_cpufreq_match_d
  	.genpd_names = qcs404_genpd_names,
  };
  
@@ -114,7 +110,7 @@ index 607fc0273e9cbd..660ca62aa0a9ac 100644
  static const struct qcom_cpufreq_match_data match_data_ipq8074 = {
  	.get_version = qcom_cpufreq_ipq8074_name_version,
  };
-@@ -401,6 +457,7 @@ static const struct of_device_id qcom_cpufreq_match_list[] __initconst = {
+@@ -404,6 +460,7 @@ static const struct of_device_id qcom_cp
  	{ .compatible = "qcom,apq8096", .data = &match_data_kryo },
  	{ .compatible = "qcom,msm8996", .data = &match_data_kryo },
  	{ .compatible = "qcom,qcs404", .data = &match_data_qcs404 },

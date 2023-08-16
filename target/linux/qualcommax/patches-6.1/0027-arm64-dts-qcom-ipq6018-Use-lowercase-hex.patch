@@ -13,11 +13,9 @@ Link: https://lore.kernel.org/r/20221212111037.98160-2-konrad.dybcio@linaro.org
  arch/arm64/boot/dts/qcom/ipq6018.dtsi | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-index 86c6b2a99cad..89e154bd5b37 100644
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -677,7 +677,7 @@ dwc_1: usb@7000000 {
+@@ -677,7 +677,7 @@
  
  		ssphy_0: ssphy@78000 {
  			compatible = "qcom,ipq6018-qmp-usb3-phy";
@@ -26,7 +24,7 @@ index 86c6b2a99cad..89e154bd5b37 100644
  			#address-cells = <2>;
  			#size-cells = <2>;
  			ranges;
-@@ -694,7 +694,7 @@ ssphy_0: ssphy@78000 {
+@@ -694,7 +694,7 @@
  			usb0_ssphy: phy@78200 {
  				reg = <0x0 0x00078200 0x0 0x130>, /* Tx */
  				      <0x0 0x00078400 0x0 0x200>, /* Rx */
@@ -35,7 +33,7 @@ index 86c6b2a99cad..89e154bd5b37 100644
  				      <0x0 0x00078600 0x0 0x044>; /* PCS misc */
  				#phy-cells = <0>;
  				#clock-cells = <0>;
-@@ -719,7 +719,7 @@ qusb_phy_0: qusb@79000 {
+@@ -719,7 +719,7 @@
  
  		usb3: usb@8af8800 {
  			compatible = "qcom,ipq6018-dwc3", "qcom,dwc3";
@@ -44,7 +42,7 @@ index 86c6b2a99cad..89e154bd5b37 100644
  			#address-cells = <2>;
  			#size-cells = <2>;
  			ranges;
-@@ -745,7 +745,7 @@ usb3: usb@8af8800 {
+@@ -745,7 +745,7 @@
  
  			dwc_0: usb@8a00000 {
  				compatible = "snps,dwc3";
@@ -53,6 +51,3 @@ index 86c6b2a99cad..89e154bd5b37 100644
  				interrupts = <GIC_SPI 140 IRQ_TYPE_LEVEL_HIGH>;
  				phys = <&qusb_phy_0>, <&usb0_ssphy>;
  				phy-names = "usb2-phy", "usb3-phy";
--- 
-2.40.1
-
