@@ -1,6 +1,6 @@
 / {
-  thermal-zones {
-    nss-top-thermal {
+	thermal-zones {
+		nss-top-thermal {
 			polling-delay-passive = <250>;
 			polling-delay = <1000>;
 
@@ -48,17 +48,17 @@
 
 			thermal-sensors = <&tsens 15>;
 		};
-  };
+	};
 };
 
 &soc {
-  tsens: thermal-sensor@4a9000 {
-    compatible = "qcom,ipq8074-tsens";
+	tsens: thermal-sensor@4a9000 {
+		compatible = "qcom,ipq8074-tsens";
 		reg = <0x00 0x4a9000 0x00 0x1000>, /* TM */
 		      <0x00 0x4a8000 0x00 0x1000>; /* SROT */
 		interrupts = <GIC_SPI 184 IRQ_TYPE_EDGE_RISING>;
-    interrupt-names = "combined";
-    #qcom,sensors = <16>;
+		interrupt-names = "combined";
+		#qcom,sensors = <16>;
 		#thermal-sensor-cells = <1>;
   };
 };
