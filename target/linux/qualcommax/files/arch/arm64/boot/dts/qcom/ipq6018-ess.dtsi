@@ -14,7 +14,7 @@
 		#clock-cells = <0>;
 	};
 
-	edma@3ab00000 {
+	edma: edma@3ab00000 {
 		compatible = "qcom,edma";
 		reg = <0x0 0x3ab00000 0x0 0xabe00>;
 		reg-names = "edma-reg-base";
