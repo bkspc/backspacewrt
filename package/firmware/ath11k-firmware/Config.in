@@ -1,0 +1,21 @@
+if PACKAGE_ath11k-firmware-ipq6018
+
+choice
+  prompt "Firmware Version"
+  default ATH11K_FIRMWARE_IPQ6018_2701_01744
+
+  config ATH11K_FIRMWARE_IPQ6018_2701_01744
+  bool "y"
+  prompt "2.7.0.1-01744"
+
+config ATH11K_FIRMWARE_IPQ6018_2601_00861
+  bool "y"
+  prompt "2.6.0.1-00861"
+
+config ATH11K_FIRMWARE_IPQ6018_2501_01208
+  bool "y"
+  prompt "2.5.0.1-01208"
+
+endchoice
+
+endif

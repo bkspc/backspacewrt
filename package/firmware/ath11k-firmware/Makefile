@@ -25,6 +25,17 @@ include $(INCLUDE_DIR)/package.mk
 RSTRIP:=:
 STRIP:=:
 
+ifeq ($(CONFIG_ATH11K_FIRMWARE_IPQ6018_2701_01744),y)
+	ATH11K_FIRMWARE_IPQ6018_VERSION=2.7.0.1
+	ATH11K_FIRMWARE_IPQ6018_BUILDNO=01744
+else ifeq ($(CONFIG_ATH11K_FIRMWARE_IPQ6018_2601_00861),y)
+	ATH11K_FIRMWARE_IPQ6018_VERSION=2.6.0.1
+	ATH11K_FIRMWARE_IPQ6018_BUILDNO=00861
+else ifeq ($(CONFIG_ATH11K_FIRMWARE_IPQ6018_2501_01208),y)
+	ATH11K_FIRMWARE_IPQ6018_VERSION=2.5.0.1
+	ATH11K_FIRMWARE_IPQ6018_BUILDNO=01208
+endif
+
 define Package/ath11k-firmware-default
   SECTION:=firmware
   CATEGORY:=Firmware
@@ -47,6 +58,10 @@ $(Package/ath11k-firmware-default)
   TITLE:=QCN9074 ath11k firmware
 endef
 
+define Package/ath11k-firmware-ipq6018/config
+source "$(SOURCE)/Config.in"
+endef
+
 define Build/Compile
 
 endef
@@ -65,7 +80,7 @@ $(eval $(call Download,qcn9074-board))
 define Package/ath11k-firmware-ipq6018/install
 	$(INSTALL_DIR) $(1)/lib/firmware/IPQ6018
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/ath11k-firmware/IPQ6018/hw1.0/2.7.0.1/WLAN.HK.2.7.0.1-01744-QCAHKSWPL_SILICONZ-1/* \
+		$(PKG_BUILD_DIR)/ath11k-firmware/IPQ6018/hw1.0/$(ATH11K_FIRMWARE_IPQ6018_VERSION)/WLAN.HK.$(ATH11K_FIRMWARE_IPQ6018_VERSION)-$(ATH11K_FIRMWARE_IPQ6018_BUILDNO)-QCAHKSWPL_SILICONZ-1/* \
 		$(1)/lib/firmware/IPQ6018/
 endef
 
