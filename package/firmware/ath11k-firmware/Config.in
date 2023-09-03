@@ -2,7 +2,7 @@ if PACKAGE_ath11k-firmware-ipq6018
 
 choice
   prompt "Firmware Version"
-  default ATH11K_FIRMWARE_IPQ6018_2701_01744
+  default ATH11K_FIRMWARE_IPQ6018_2501_01208
 
   config ATH11K_FIRMWARE_IPQ6018_2701_01744
   bool "y"
