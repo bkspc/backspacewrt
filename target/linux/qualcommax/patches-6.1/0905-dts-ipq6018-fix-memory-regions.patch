@@ -1,0 +1,49 @@
+\x
+--- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
+@@ -150,6 +150,22 @@
+ 			no-map;
+ 		};
+ 
++	// optional?
++	//	nss_region: memory@40000000 {
++	//		reg = <0x0 0x40000000 0x0 0x01000000>;
++	//		no-map;
++	//	};
++
++		uboot: memory@4a100000 {
++			reg = <0x0 0x4a100000 0x0 0x00400000>;
++			no-map;
++		};
++
++		sbl: memory@4a500000 {
++			reg = <0x0 0x4a500000 0x0 0x00100000>;
++			no-map;
++		};
++
+ 		tz: memory@4a600000 {
+ 			reg = <0x0 0x4a600000 0x0 0x00400000>;
+ 			no-map;
+@@ -161,9 +177,21 @@
+ 		};
+ 
+ 		q6_region: memory@4ab00000 {
+-			reg = <0x0 0x4ab00000 0x0 0x05500000>;
++			reg = <0x0 0x4ab00000 0x0 0x03700000>;
+ 			no-map;
+ 		};
++
++		q6_etr_region: memory@4E200000 {
++			reg = <0x0 0x4E200000 0x0 0x100000>;
++			no-map;
++		};
++		
++	// optional?
++	//	m3_dump: memory@4e300000 {
++	//		reg = <0x0 0x4e300000 0x0 0x100000>;
++ 	//		no-map;
++ 	//	};
++
+ 	};
+ 
+ 	smem {
