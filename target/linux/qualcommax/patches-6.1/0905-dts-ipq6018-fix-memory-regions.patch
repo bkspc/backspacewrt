@@ -33,16 +33,16 @@
  			no-map;
  		};
 +
-+		q6_etr_region: memory@4D300000 {
-+			reg = <0x0 0x4D300000 0x0 0x100000>;
++		q6_etr_region: memory@4d300000 {
++			reg = <0x0 0x4d300000 0x0 0x100000>;
 +			no-map;
 +		};
-+		
++
 +	// optional?
-+	//	m3_dump: memory@4e300000 {
-+	//		reg = <0x0 0x4e300000 0x0 0x100000>;
-+ 	//		no-map;
-+ 	//	};
++		m3_dump: memory@4d400000 {
++			reg = <0x0 0x4d400000 0x0 0x100000>;
++ 		no-map;
++ 	};
 +
  	};
  
