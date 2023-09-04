@@ -1,15 +1,14 @@
 \x
 --- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
-@@ -150,6 +150,22 @@
+@@ -162,6 +162,21 @@
  			no-map;
  		};
  
-+	// optional?
-+	//	nss_region: memory@40000000 {
-+	//		reg = <0x0 0x40000000 0x0 0x01000000>;
-+	//		no-map;
-+	//	};
++		// tzapp_region: memory@49b00000 {
++		// 	reg = <0x0 0x49b00000 0x0 0x00600000>;
++		// 	no-map;
++		// };
 +
 +		uboot: memory@4a100000 {
 +			reg = <0x0 0x4a100000 0x0 0x00400000>;
@@ -24,26 +23,20 @@
  		tz: memory@4a600000 {
  			reg = <0x0 0x4a600000 0x0 0x00400000>;
  			no-map;
-@@ -161,9 +177,21 @@
- 		};
- 
- 		q6_region: memory@4ab00000 {
--			reg = <0x0 0x4ab00000 0x0 0x05500000>;
-+			reg = <0x0 0x4ab00000 0x0 0x02800000>;
+@@ -176,6 +191,16 @@
+ 			reg = <0x0 0x4ab00000 0x0 0x05500000>;
  			no-map;
  		};
 +
-+		q6_etr_region: memory@4d300000 {
-+			reg = <0x0 0x4d300000 0x0 0x100000>;
++		q6_etr_region: memory@50000000 {
++			reg = <0x0 0x50000000 0x0 0x100000>;
 +			no-map;
 +		};
 +
-+	// optional?
-+		m3_dump: memory@4d400000 {
-+			reg = <0x0 0x4d400000 0x0 0x100000>;
-+ 		no-map;
-+ 	};
-+
++		m3_dump_region: memory@50100000 {
++			reg = <0x0 0x50100000 0x0 0x100000>;
++			no-map;
++		};
  	};
  
- 	smem {
+ 	rpm-glink {
