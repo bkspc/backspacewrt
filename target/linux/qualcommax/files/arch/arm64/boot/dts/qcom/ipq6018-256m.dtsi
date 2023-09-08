@@ -3,7 +3,7 @@
 #include "ipq6018.dtsi"
 
 &nss_region {
-	reg = <0x0 0x4a000000 0x0 0x00800000>;
+	reg = <0x0 0x40000000 0x0 0x00800000>;
 };
 
 /delete-node/ &tzapp_region;
