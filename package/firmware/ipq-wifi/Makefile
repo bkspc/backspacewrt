@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/version.mk
 
 PKG_NAME:=ipq-wifi
-PKG_RELEASE:=2
+PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=https://github.com/bkspc/firmware_qca-wireless.git
@@ -36,6 +36,7 @@ ALLWIFIBOARDS:= \
   linksys_mr7350 \
   netgear_rax120v2 \
 	netgear_wax218 \
+	netgear_wax620 \
 	prpl_haze \
   p2w_r619ac \
 	qnap_301w \
@@ -44,7 +45,9 @@ ALLWIFIBOARDS:= \
 	wallys_dr40x9 \
 	xiaomi_ax3600 \
 	xiaomi_ax9000 \
+	yyets_le1 \
 	zte_mf289f \
+	zte_mf287 \
 	zte_mf287plus \
 	zyxel_nbg7815
 
@@ -131,6 +134,7 @@ $(eval $(call generate-ipq-wifi-package,linksys_ea8300,Linksys EA8300))
 $(eval $(call generate-ipq-wifi-package,linksys_mr7350,Linksys MR7350))
 $(eval $(call generate-ipq-wifi-package,netgear_rax120v2,Netgear RAX120v2))
 $(eval $(call generate-ipq-wifi-package,netgear_wax218,Netgear WAX218))
+$(eval $(call generate-ipq-wifi-package,netgear_wax620,Netgear WAX620))
 $(eval $(call generate-ipq-wifi-package,qnap_301w,QNAP 301w))
 $(eval $(call generate-ipq-wifi-package,p2w_r619ac,P2W R619AC))
 $(eval $(call generate-ipq-wifi-package,prpl_haze,prpl Haze))
@@ -139,7 +143,9 @@ $(eval $(call generate-ipq-wifi-package,sony_ncp-hg100-cellular,Sony NCP-HG100 C
 $(eval $(call generate-ipq-wifi-package,wallys_dr40x9,Wallys DR40X9))
 $(eval $(call generate-ipq-wifi-package,xiaomi_ax3600,Xiaomi AX3600))
 $(eval $(call generate-ipq-wifi-package,xiaomi_ax9000,Xiaomi AX9000))
+$(eval $(call generate-ipq-wifi-package,yyets_le1,YYeTs LE1))
 $(eval $(call generate-ipq-wifi-package,zte_mf289f,ZTE MF289F))
+$(eval $(call generate-ipq-wifi-package,zte_mf287,ZTE MF287))
 $(eval $(call generate-ipq-wifi-package,zte_mf287plus,ZTE MF287Plus))
 $(eval $(call generate-ipq-wifi-package,zyxel_nbg7815,Zyxel NBG7815))
 
