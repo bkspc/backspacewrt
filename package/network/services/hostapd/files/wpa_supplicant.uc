@@ -1,6 +1,6 @@
 let libubus = require("ubus");
 import { open, readfile } from "fs";
-import { wdev_create, wdev_remove, is_equal, vlist_new, phy_open } from "common";
+import { wdev_create, wdev_set_mesh_params, wdev_remove, is_equal, wdev_set_up, vlist_new, phy_open } from "common";
 
 let ubus = libubus.connect();
 
@@ -40,6 +40,7 @@ function iface_start(phydev, iface, macaddr_list)
 	let ret = wdev_create(phy, ifname, wdev_config);
 	if (ret)
 		wpas.printf(`Failed to create device ${ifname}: ${ret}`);
+	wdev_set_up(ifname, true);
 	wpas.add_iface(iface.config);
 	iface.running = true;
 }
@@ -243,8 +244,32 @@ let main_obj = {
 	},
 };
 
+function handle_debug_config(cfg) {
+	if (!cfg)
+		return;
+
+	let data = cfg.service;
+	if (!data)
+		return;
+
+	data = data.wpa_supplicant;
+	if (!data)
+		return;
+
+	wpas.udebug_set(!!+data.enabled);
+}
+
 wpas.data.ubus = ubus;
 wpas.data.obj = ubus.publish("wpa_supplicant", main_obj);
+wpas.data.debug_sub = ubus.subscriber((req) => {
+	if (req.type != "config")
+		return;
+
+	handle_debug_config(req.data);
+});
+
+wpas.data.debug_sub.subscribe("udebug");
+handle_debug_config(ubus.call("udebug", "get_config", {}));
 
 function iface_event(type, name, data) {
 	let ubus = wpas.data.ubus;
@@ -316,6 +341,23 @@ return {
 		}
 
 		iface_hostapd_notify(phy, ifname, iface, state);
+
+		if (state != "COMPLETED")
+			return;
+
+		let phy_data = wpas.data.config[phy];
+		if (!phy_data)
+			return;
+
+		let iface_data = phy_data.data[ifname];
+		if (!iface_data)
+			return;
+
+		let wdev_config = iface_data.config;
+		if (!wdev_config || wdev_config.mode != "mesh")
+			return;
+
+		wdev_set_mesh_params(ifname, wdev_config);
 	},
 	event: function(ifname, iface, ev, info) {
 		let phy = wpas.data.iface_phy[ifname];

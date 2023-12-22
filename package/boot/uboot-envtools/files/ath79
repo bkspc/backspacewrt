@@ -31,6 +31,7 @@ asus,zenwifi-cd6n|\
 asus,zenwifi-cd6r|\
 buffalo,bhr-4grv2|\
 devolo,magic-2-wifi|\
+dlink,dap-1720-a1|\
 dlink,dir-859-a1|\
 dlink,dir-859-a3|\
 dlink,dir-869-a1|\
@@ -105,7 +106,9 @@ dongwon,dw02-412h-128m|\
 glinet,gl-ar300m-lite|\
 glinet,gl-ar300m-nand|\
 glinet,gl-ar300m-nor|\
-glinet,gl-ar300m16)
+glinet,gl-ar300m16|\
+glinet,gl-s200-nor|\
+glinet,gl-s200-nor-nand)
 	idx="$(find_mtd_index u-boot-env)"
 	[ -n "$idx" ] && \
 		ubootenv_add_uci_config "/dev/mtd$idx" "0x0" "0x10000" "0x10000"
