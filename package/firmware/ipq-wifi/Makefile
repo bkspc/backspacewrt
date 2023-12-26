@@ -6,8 +6,8 @@ PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=https://github.com/bkspc/firmware_qca-wireless.git
-PKG_SOURCE_DATE:=2023-08-23
-PKG_SOURCE_VERSION:=3075d8afc278bf0033250963a8c321c398265bd4
+PKG_SOURCE_DATE:=2023-11-30
+PKG_SOURCE_VERSION:=2f2559d0f77f42a59643256b664d63faf7e2322c
 
 PKG_FLAGS:=nonshared
 
@@ -32,17 +32,17 @@ ALLWIFIBOARDS:= \
 	dynalink_dl-wrx36 \
 	edgecore_eap102 \
 	edimax_cax1800 \
-  linksys_ea8300 \
-  linksys_mr7350 \
-  netgear_rax120v2 \
+	linksys_ea8300 \
+	linksys_mr7350 \
+	netgear_rax120v2 \
 	netgear_wax218 \
 	netgear_wax620 \
 	netgear_wax630 \
 	prpl_haze \
-  p2w_r619ac \
+	p2w_r619ac \
 	qnap_301w \
 	redmi_ax6 \
-  sony_ncp-hg100-cellular \
+	sony_ncp-hg100-cellular \
 	wallys_dr40x9 \
 	xiaomi_ax3600 \
 	xiaomi_ax9000 \
