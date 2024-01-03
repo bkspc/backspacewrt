@@ -278,12 +278,12 @@ function iface_reload_config(phydev, config, old_config)
 		return false;
 
 	let iface = hostapd.interfaces[phy];
+	let iface_name = old_config.bss[0].ifname;
 	if (!iface) {
 		hostapd.printf(`Could not find previous interface ${iface_name}`);
 		return false;
 	}
 
-	let iface_name = old_config.bss[0].ifname;
 	let first_bss = hostapd.bss[iface_name];
 	if (!first_bss) {
 		hostapd.printf(`Could not find bss of previous interface ${iface_name}`);
@@ -571,7 +571,7 @@ function iface_load_config(filename)
 
 	let bss;
 	let line;
-	while ((line = trim(f.read("line"))) != null) {
+	while ((line = rtrim(f.read("line"), "\n")) != null) {
 		let val = split(line, "=", 2);
 		if (!val[0])
 			continue;
@@ -593,7 +593,7 @@ function iface_load_config(filename)
 		push(config.radio.data, line);
 	}
 
-	while ((line = trim(f.read("line"))) != null) {
+	while ((line = rtrim(f.read("line"), "\n")) != null) {
 		if (line == "#default_macaddr")
 			bss.default_macaddr = true;
 
@@ -782,8 +782,33 @@ let main_obj = {
 	},
 };
 
+function handle_debug_config(cfg) {
+	hostapd.printf(`handle_debug_config: ${cfg}\n`);
+	if (!cfg)
+		return;
+
+	let data = cfg.service;
+	if (!data)
+		return;
+
+	data = data.hostapd;
+	if (!data)
+		return;
+
+	hostapd.udebug_set(!!+data.enabled);
+}
+
 hostapd.data.ubus = ubus;
 hostapd.data.obj = ubus.publish("hostapd", main_obj);
+hostapd.data.debug_sub = ubus.subscriber((req) => {
+	if (req.type != "config")
+		return;
+
+	handle_debug_config(req.data);
+});
+
+hostapd.data.debug_sub.subscribe("udebug");
+handle_debug_config(ubus.call("udebug", "get_config", {}));
 
 function bss_event(type, name, data) {
 	let ubus = hostapd.data.ubus;
