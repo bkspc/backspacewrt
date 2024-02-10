@@ -1,3 +1,5 @@
+#include <dt-bindings/net/qcom-ipq-ess.h>
+
 &soc {
 	bias_pll_cc_clk: bias-pll-cc-clk {
 		compatible = "fixed-clock";
@@ -155,6 +157,13 @@
 					"uniphy0_port_4_5_rst",
 					"uniphy0_port_4_rst";
 			mdio-bus = <&mdio>;
+
+			switch_cpu_bmp = <ESS_PORT0>;  /* cpu port bitmap */
+			switch_inner_bmp = <(ESS_PORT6 | ESS_PORT7)>; /*inner port bitmap*/
+			switch_mac_mode = <MAC_MODE_DISABLED>; /* MAC mode for UNIPHY instance 0 */
+			switch_mac_mode1 = <MAC_MODE_DISABLED>; /* MAC mode for UNIPHY instance 1 */
+			switch_mac_mode2 = <MAC_MODE_DISABLED>; /* MAC mode for UNIPHY instance 2 */
+
 			status = "disabled";
 
 			bm_tick_mode = <0>; /* bm tick mode */
@@ -448,8 +457,6 @@
 		reg = <0x0 0x3a001000 0x0 0x200>;
 		qcom,mactype = <0>;
 		local-mac-address = [000000000000];
-		qcom,link-poll = <1>;
-		qcom,phy-mdio-addr = <0>;
 		phy-mode = "sgmii";
 		status = "disabled";
 	};
@@ -461,8 +468,6 @@
 		reg = <0x0 0x3a001200 0x0 0x200>;
 		qcom,mactype = <0>;
 		local-mac-address = [000000000000];
-		qcom,link-poll = <1>;
-		qcom,phy-mdio-addr = <1>;
 		phy-mode = "sgmii";
 		status = "disabled";
 	};
@@ -474,8 +479,6 @@
 		reg = <0x0 0x3a001400 0x0 0x200>;
 		qcom,mactype = <0>;
 		local-mac-address = [000000000000];
-		qcom,link-poll = <1>;
-		qcom,phy-mdio-addr = <2>;
 		phy-mode = "sgmii";
 		status = "disabled";
 	};
@@ -487,8 +490,6 @@
 		reg = <0x0 0x3a001600 0x0 0x200>;
 		qcom,mactype = <0>;
 		local-mac-address = [000000000000];
-		qcom,link-poll = <1>;
-		qcom,phy-mdio-addr = <3>;
 		phy-mode = "sgmii";
 		status = "disabled";
 	};
@@ -500,8 +501,6 @@
 		reg = <0x0 0x3a001800 0x0 0x200>;
 		qcom,mactype = <0>;
 		local-mac-address = [000000000000];
-		qcom,link-poll = <1>;
-		qcom,phy-mdio-addr = <4>;
 		phy-mode = "sgmii";
 		status = "disabled";
 	};

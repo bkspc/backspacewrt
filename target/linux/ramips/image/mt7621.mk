@@ -1093,6 +1093,8 @@ define Device/etisalat_s3
   SERCOMM_SWVER := 4009
   DEVICE_VENDOR := Etisalat
   DEVICE_MODEL := S3
+  DEVICE_ALT0_VENDOR := Sercomm
+  DEVICE_ALT0_MODEL := S3
   DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615-firmware kmod-usb3
 endef
 TARGET_DEVICES += etisalat_s3
@@ -2080,6 +2082,20 @@ define Device/renkforce_ws-wn530hp3-a
   IMAGE_SIZE := 15040k
 endef
 TARGET_DEVICES += renkforce_ws-wn530hp3-a
+
+define Device/rostelecom_rt-fe-1a
+  $(Device/sercomm_dxx)
+  IMAGE_SIZE := 24576k
+  SERCOMM_HWID := CX4
+  SERCOMM_HWVER := 11300
+  SERCOMM_SWVER := 2010
+  DEVICE_VENDOR := Rostelecom
+  DEVICE_MODEL := RT-FE-1A
+  DEVICE_ALT0_VENDOR := Sercomm
+  DEVICE_ALT0_MODEL := RT-FE-1A
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615-firmware
+endef
+TARGET_DEVICES += rostelecom_rt-fe-1a
 
 define Device/rostelecom_rt-sf-1
   $(Device/sercomm_dxx)

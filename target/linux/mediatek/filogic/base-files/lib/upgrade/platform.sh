@@ -1,5 +1,16 @@
 REQUIRE_IMAGE_METADATA=1
 
+asus_initial_setup()
+{
+	# initialize UBI if it's running on initramfs
+	[ "$(rootfs_type)" = "tmpfs" ] || return 0
+
+	ubirmvol /dev/ubi0 -N rootfs
+	ubirmvol /dev/ubi0 -N rootfs_data
+	ubirmvol /dev/ubi0 -N jffs2
+	ubimkvol /dev/ubi0 -N jffs2 -s 0x3e000
+}
+
 xiaomi_initial_setup()
 {
 	# initialize UBI and setup uboot-env if it's running on initramfs
@@ -38,6 +49,7 @@ xiaomi_initial_setup()
 
 	local board=$(board_name)
 	case "$board" in
+	xiaomi,mi-router-ax3000t|\
 	xiaomi,mi-router-wr30u-stock)
 		fw_setenv mtdparts "nmbm0:1024k(bl2),256k(Nvram),256k(Bdata),2048k(factory),2048k(fip),256k(crash),256k(crash_log),34816k(ubi),34816k(ubi1),32768k(overlay),12288k(data),256k(KF)"
 		;;
@@ -51,11 +63,16 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
-	acer,predator-w6)
+	acer,predator-w6|\
+	smartrg,sdg-8612|\
+	smartrg,sdg-8614|\
+	smartrg,sdg-8622|\
+	smartrg,sdg-8632)
 		CI_KERNPART="kernel"
 		CI_ROOTPART="rootfs"
 		emmc_do_upgrade "$1"
 		;;
+	asus,rt-ax59u|\
 	asus,tuf-ax4200|\
 	asus,tuf-ax6000)
 		CI_UBIPART="UBI_DEV"
@@ -94,7 +111,8 @@ platform_do_upgrade() {
 			;;
 		esac
 		;;
-	cudy,wr3000-v1)
+	cudy,wr3000-v1|\
+	yuncore,ax835)
 		default_do_upgrade "$1"
 		;;
 	glinet,gl-mt2500|\
@@ -110,10 +128,15 @@ platform_do_upgrade() {
 	tplink,tl-xdr4288|\
 	tplink,tl-xdr6086|\
 	tplink,tl-xdr6088|\
+	xiaomi,mi-router-ax3000t-ubootmod|\
 	xiaomi,mi-router-wr30u-ubootmod|\
 	xiaomi,redmi-router-ax6000-ubootmod)
 		CI_KERNPART="fit"
 		nand_do_upgrade "$1"
+		;;
+	jdcloud,re-cp-03)
+		CI_KERNPART="production"
+		emmc_do_upgrade "$1"
 		;;
 	mercusys,mr90x-v1)
 		CI_UBIPART="ubi0"
@@ -124,6 +147,7 @@ platform_do_upgrade() {
 		EMMC_ROOT_DEV="$(cmdline_get_var root)"
 		emmc_do_upgrade "$1"
 		;;
+	xiaomi,mi-router-ax3000t|\
 	xiaomi,mi-router-wr30u-stock|\
 	xiaomi,redmi-router-ax6000-stock)
 		CI_KERN_UBIPART=ubi_kernel
@@ -180,6 +204,7 @@ platform_copy_config() {
 	acer,predator-w6|\
 	glinet,gl-mt2500|\
 	glinet,gl-mt6000|\
+	jdcloud,re-cp-03|\
 	ubnt,unifi-6-plus)
 		emmc_copy_config
 		;;
@@ -190,6 +215,12 @@ platform_pre_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
+	asus,rt-ax59u|\
+	asus,tuf-ax4200|\
+	asus,tuf-ax6000)
+		asus_initial_setup
+		;;
+	xiaomi,mi-router-ax3000t|\
 	xiaomi,mi-router-wr30u-stock|\
 	xiaomi,redmi-router-ax6000-stock)
 		xiaomi_initial_setup

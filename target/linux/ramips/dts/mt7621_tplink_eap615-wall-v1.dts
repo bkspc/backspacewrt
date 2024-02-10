@@ -26,7 +26,6 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
-			label = "white:status";
 			color = <LED_COLOR_ID_WHITE>;
 			function = LED_FUNCTION_STATUS;
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
@@ -133,6 +132,16 @@
 				label = "radio";
 				reg = <0xff0000 0x10000>;
 				read-only;
+
+				nvmem-layout {
+					compatible = "fixed-layout";
+					#address-cells = <1>;
+					#size-cells = <1>;
+
+					eeprom_radio_0: eeprom@0 {
+						reg = <0x0 0xe00>;
+					};
+				};
 			};
 		};
 	};
@@ -153,7 +162,8 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
-		mediatek,mtd-eeprom = <&radio 0x0>;
+		nvmem-cells = <&eeprom_radio_0>;
+		nvmem-cell-names = "eeprom";
 		mediatek,disable-radar-background;
 	};
 };

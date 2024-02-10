@@ -666,6 +666,18 @@ define Device/tplink_re305-v3
 endef
 TARGET_DEVICES += tplink_re305-v3
 
+define Device/tplink_re365-v1
+  $(Device/tplink-safeloader)
+  DEVICE_MODEL := RE365
+  DEVICE_VARIANT := v1
+  DEVICE_PACKAGES := kmod-mt76x2
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | check-size | append-metadata
+  IMAGE_SIZE := 7680k
+  KERNEL_SIZE := 6016k
+  TPLINK_BOARD_ID := RE365
+endef
+TARGET_DEVICES += tplink_re365-v1
+
 define Device/tplink_tl-mr3020-v3
   $(Device/tplink-v2)
   IMAGE_SIZE := 7808k
@@ -854,6 +866,22 @@ define Device/tplink_tl-wr902ac-v3
   IMAGE/tftp-recovery.bin := pad-extra 128k | $$(IMAGE/factory.bin)
 endef
 TARGET_DEVICES += tplink_tl-wr902ac-v3
+
+define Device/tplink_tl-wr902ac-v4
+  $(Device/tplink-v2)
+  IMAGE_SIZE := 7808k
+  DEVICE_MODEL := TL-WR902AC
+  DEVICE_VARIANT := v4
+  TPLINK_FLASHLAYOUT := 8Mmtk
+  TPLINK_HWID := 0x000dc88f
+  TPLINK_HWREV := 0x89
+  TPLINK_HWREVADD := 0x1
+  DEVICE_PACKAGES := kmod-mt7615e kmod-mt7663-firmware-ap kmod-usb2 kmod-usb-ohci \
+	kmod-usb-ledtrig-usbport
+  IMAGES := sysupgrade.bin tftp-recovery.bin
+  IMAGE/tftp-recovery.bin := pad-extra 128k | $$(IMAGE/factory.bin)
+endef
+TARGET_DEVICES += tplink_tl-wr902ac-v4
 
 define Device/unielec_u7628-01-16m
   IMAGE_SIZE := 16064k

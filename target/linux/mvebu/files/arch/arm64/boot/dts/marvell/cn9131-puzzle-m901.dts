@@ -10,6 +10,7 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+#include <dt-bindings/leds/common.h>
 
 / {
 	model = "iEi Puzzle-M901";
@@ -96,7 +97,8 @@
 
 			led_power: led@3 {
 				reg = <3>;
-				label = "yellow:power";
+				function = LED_FUNCTION_POWER;
+				color = <LED_COLOR_ID_YELLOW>;
 				active-low;
 				default-state = "on";
 			};
@@ -244,6 +246,10 @@
 	};
 };
 
+&cp0_rtc {
+	status = "disabled";
+};
+
 &cp0_syscon0 {
 	cp0_pinctrl: pinctrl {
 		compatible = "marvell,cp115-standalone-pinctrl";
@@ -365,6 +371,10 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&cp1_i2c0_pins>;
 	clock-frequency = <100000>;
+};
+
+&cp1_rtc {
+	status = "disabled";
 };
 
 &cp1_syscon0 {

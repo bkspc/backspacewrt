@@ -151,17 +151,13 @@ endif
 
 # Disable noisy checks by default as in upstream
 DTC_WARN_FLAGS := \
+  -Wno-interrupt_provider \
+  -Wno-unique_unit_address \
   -Wno-unit_address_vs_reg \
-  -Wno-simple_bus_reg \
-  -Wno-unit_address_format \
-  -Wno-pci_bridge \
-  -Wno-pci_device_bus_num \
-  -Wno-pci_device_reg \
   -Wno-avoid_unnecessary_addr_size \
   -Wno-alias_paths \
   -Wno-graph_child_address \
-  -Wno-graph_port \
-  -Wno-unique_unit_address
+  -Wno-simple_bus_reg
 
 DTC_FLAGS += $(DTC_WARN_FLAGS)
 DTCO_FLAGS += $(DTC_WARN_FLAGS)
@@ -586,7 +582,7 @@ define Device/Build/dtb
   $(KDIR)/image-$(1).dtb: FORCE
 	$(call Image/BuildDTB,$(strip $(2))/$(strip $(3)).dts,$$@)
 
-  image_prepare: $(KDIR)/image-$(1).dtb
+  compile-dtb: $(KDIR)/image-$(1).dtb
   endif
 
 endef
@@ -597,7 +593,7 @@ define Device/Build/dtbo
   $(KDIR)/image-$(1).dtbo: FORCE
 	$(call Image/BuildDTBO,$(strip $(2))/$(strip $(3)).dtso,$$@)
 
-  image_prepare: $(KDIR)/image-$(1).dtbo
+  compile-dtb: $(KDIR)/image-$(1).dtbo
   endif
 
 endef
@@ -845,18 +841,20 @@ define BuildImage
   download:
   prepare:
   compile:
+  compile-dtb:
   clean:
   image_prepare:
 
   ifeq ($(IB),)
-    .PHONY: download prepare compile clean image_prepare kernel_prepare install install-images
+    .PHONY: download prepare compile compile-dtb clean image_prepare kernel_prepare install install-images
     compile:
 		$(call Build/Compile)
 
     clean:
 		$(call Build/Clean)
 
-    image_prepare: compile
+    compile-dtb:
+    image_prepare: compile compile-dtb
 		mkdir -p $(BIN_DIR) $(KDIR)/tmp
 		rm -rf $(BUILD_DIR)/json_info_files
 		$(call Image/Prepare)

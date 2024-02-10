@@ -1,4 +1,4 @@
-From b68ab1af5dac0737376c0fad1d8f6f80809e88df Mon Sep 17 00:00:00 2001
+From 563db68137475d011b355bfe674d1b7a24778091 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Sat, 8 Oct 2022 22:26:31 +0200
 Subject: [PATCH] psci: dont advertise OSI support for IPQ6018
