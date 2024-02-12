@@ -76,7 +76,7 @@ Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
 +		 *   2’b0     No Limit     BIT(0)
 +		 *   2’b1     1.5 GHz      BIT(1)
 +		 */
-+		drv->versions = 1 << (unsigned int)(*speedbin);
++		drv->versions = BIT(0);
 +		break;
 +	case QCOM_ID_IPQ6000:
 +		/*
