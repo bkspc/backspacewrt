@@ -48,7 +48,7 @@ Signed-off-by: David S. Miller <davem@davemloft.net>
  #include <linux/netdevice.h>
  #include <linux/phy.h>
  #include <linux/phy_led_triggers.h>
-@@ -644,6 +646,7 @@ struct phy_device *phy_device_create(str
+@@ -642,6 +644,7 @@ struct phy_device *phy_device_create(str
  	device_initialize(&mdiodev->dev);
  
  	dev->state = PHY_DOWN;
