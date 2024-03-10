@@ -15,6 +15,7 @@
 
 	aliases {
 		serial0 = &blsp1_uart3;
+		serial1 = &blsp1_uart2;
 		led-boot = &led_system_blue;
 		led-failsafe = &led_system_red;
 		led-running = &led_system_blue;
@@ -38,24 +39,27 @@
 	keys {
 		compatible = "gpio-keys";
 
-		reset {
+		reset-button {
 			label = "reset";
 			gpios = <&tlmm 57 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
 		};
 
-		wps {
+		wps-button {
 			label = "wps";
 			gpios = <&tlmm 56 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_WPS_BUTTON>;
 		};
 	};
-};
 
-&blsp1_uart3 {
-	pinctrl-0 = <&serial_3_pins>;
-	pinctrl-names = "default";
-	status = "okay";
+	reg_usb_vbus: regulator-usb-vbus {
+		compatible = "regulator-fixed";
+		regulator-name = "usb_vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&tlmm 61 GPIO_ACTIVE_LOW>;
+		regulator-always-on;
+	};
 };
 
 &tlmm {
@@ -81,11 +85,11 @@
 		};
 	};
 
-	usb-power-hog {
-		gpio-hog;
-		gpios = <61 GPIO_ACTIVE_LOW>;
-		output-high;
-		line-name = "usb-power-gpio";
+	serial_2_pins: serial2-pinmux {
+		pins = "gpio69", "gpio70", "gpio71", "gpio72";
+		function = "blsp1_uart";
+		drive-strength = <8>;
+		bias-disable;
 	};
 };
 
@@ -94,6 +98,48 @@
 	pinctrl-names = "default";
 	status = "okay";
 };
+
+&blsp1_uart2 {
+	pinctrl-0 = <&serial_2_pins>;
+	pinctrl-names = "default";
+	dmas = <&blsp_dma 2>, <&blsp_dma 3>;
+	dma-names = "tx", "rx";
+
+	status = "okay";
+};
+
+&prng {
+	status = "okay";
+};
+
+&cryptobam {
+	status = "okay";
+};
+
+&crypto {
+	status = "okay";
+};
+
+&qpic_bam {
+	status = "okay";
+};
+
+&qpic_nand {
+	status = "okay";
+
+	nand@0 {
+		reg = <0>;
+
+		nand-ecc-strength = <4>;
+		nand-ecc-step-size = <512>;
+		nand-bus-width = <8>;
+
+		partitions {
+			compatible = "qcom,smem-part";
+		};
+	};
+};
+
 
 &blsp1_i2c3 {
 	pinctrl-0 = <&i2c_1_pins>;
@@ -126,37 +172,6 @@
 	};
 };
 
-&qpic_bam {
-	status = "okay";
-};
-
-&qpic_nand {
-	status = "okay";
-
-	nand@0 {
-		reg = <0>;
-
-		nand-ecc-strength = <4>;
-		nand-ecc-step-size = <512>;
-		nand-bus-width = <8>;
-
-		partitions {
-			compatible = "qcom,smem-part";
-		};
-	};
-};
-
-&ssphy_0 {
-	status = "okay";
-};
-
-&qusb_phy_0 {
-	status = "okay";
-};
-
-&usb3 {
-	status = "okay";
-};
 
 &mdio {
 	status = "okay";
@@ -199,14 +214,11 @@
 };
 
 &switch {
-	switch_cpu_bmp = <0x1>;  /* cpu port bitmap */
-	switch_lan_bmp = <0x1e>; /* lan port bitmap */
-	switch_wan_bmp = <0x20>; /* wan port bitmap */
-	switch_inner_bmp = <0xc0>; /*inner port bitmap*/
-	switch_mac_mode = <0x0>; /* mac mode for uniphy instance0*/
-	switch_mac_mode1 = <0xff>; /* mac mode for uniphy instance1*/
-	switch_mac_mode2 = <0xff>; /* mac mode for uniphy instance2*/
 	status = "okay";
+
+	switch_lan_bmp = <(ESS_PORT1|ESS_PORT2|ESS_PORT3|ESS_PORT4)>; /* lan port bitmap */
+	switch_wan_bmp = <(ESS_PORT5)>; /* wan port bitmap */
+	switch_mac_mode = <MAC_MODE_PSGMII>; /* mac mode for uniphy instance0*/
 
 	qcom,port_phyinfo {
 		port@0 {
@@ -275,4 +287,17 @@
 	status = "okay";
 
 	qcom,ath11k-calibration-variant = "Linksys-MR7350";
+};
+
+&ssphy_0 {
+	status = "okay";
+};
+
+&qusb_phy_0 {
+	status = "okay";
+};
+
+&usb3 {
+	vbus-supply = <&reg_usb_vbus>;
+	status = "okay";
 };
