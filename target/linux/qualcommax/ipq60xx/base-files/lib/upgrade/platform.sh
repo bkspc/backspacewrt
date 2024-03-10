@@ -90,6 +90,9 @@ platform_do_upgrade() {
 	linksys,mr7350)
 		linksys_do_upgrade "$1"
 		;;
+	netgear,wax214)
+		nand_do_upgrade "$1"
+		;;
 	*)
 		default_do_upgrade "$1"
 		;;
