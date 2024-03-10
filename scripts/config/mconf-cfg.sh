@@ -37,8 +37,8 @@ if [ -f /usr/include/ncurses/ncurses.h ]; then
 fi
 
 if [ -f /opt/homebrew/opt/ncurses/include/ncurses/ncurses.h ]; then
-	echo cflags=\"-D_GNU_SOURCE -I/opt/homebrew/opt/ncurses/include/ncurses\"
-	echo libs=\"-L/opt/homebrew/opt/ncurses/lib -lncurses\"
+	echo -D_GNU_SOURCE -I/opt/homebrew/opt/ncurses/include/ncurses > ${cflags}
+	echo -L/opt/homebrew/opt/ncurses/lib -lncurses > ${libs}
 	exit 0
 fi
 
