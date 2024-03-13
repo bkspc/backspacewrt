@@ -3,11 +3,12 @@
 /dts-v1/;
 
 #include "ipq6018-256m.dtsi"
+#include "ipq6018-cp-cpu.dtsi"
 #include "ipq6018-ess.dtsi"
 #include "ipq6018-thermal.dtsi"
-#include "ipq6018-cp-cpu.dtsi"
-#include <dt-bindings/input/input.h>
 #include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/leds/common.h>
 
 / {
 	model = "Linksys MR7350";
@@ -104,7 +105,6 @@
 	pinctrl-names = "default";
 	dmas = <&blsp_dma 2>, <&blsp_dma 3>;
 	dma-names = "tx", "rx";
-
 	status = "okay";
 };
 
@@ -146,27 +146,29 @@
 	pinctrl-names = "default";
 	status = "okay";
 
-	leds@62 {
+	led-controller@62 {
 		compatible = "nxp,pca9633";
 		#address-cells = <1>;
 		#size-cells = <0>;
 		reg = <0x62>;
-
 		nxp,hw-blink;
 
 		led_system_red: red@0 {
-			label = "red";
 			reg = <0>;
+			color = <LED_COLOR_ID_RED>;
+			function = LED_FUNCTION_STATUS;
 		};
 
 		led_system_green: green@1 {
-			label = "green";
 			reg = <1>;
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_STATUS;
 		};
 
 		led_system_blue: blue@2 {
-			label = "blue";
 			reg = <2>;
+			color = <LED_COLOR_ID_BLUE>;
+			function = LED_FUNCTION_STATUS;
 			linux,default-trigger = "default-on";
 		};
 	};
@@ -181,34 +183,132 @@
 	reset-gpios = <&tlmm 75 GPIO_ACTIVE_LOW>;
 
 	ethernet-phy-package@0 {
-		#address-cels = <1>;
+		#address-cells = <1>;
 		#size-cells = <0>;
 		compatible = "qcom,qca8075-package";
 		reg = <0>;
+		qcom,package-mode = "psgmii";
 
 		qca8075_0: ethernet-phy@0 {
 			compatible = "ethernet-phy-ieee802.3-c22";
 			reg = <0>;
+
+			qcom,package-mode = "psgmii";
+
+			leds {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				led@0 {
+					reg = <0>;
+					color = <LED_COLOR_ID_YELLOW>;
+					function = LED_FUNCTION_LAN;
+					default-state = "keep";
+				};
+
+				led@1 {
+					reg = <1>;
+					color = <LED_COLOR_ID_GREEN>;
+					function = LED_FUNCTION_LAN;
+					default-state = "keep";
+				};
+			};
 		};
 
 		qca8075_1: ethernet-phy@1 {
 			compatible = "ethernet-phy-ieee802.3-c22";
 			reg = <1>;
+
+			leds {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				led@0 {
+					reg = <0>;
+					color = <LED_COLOR_ID_YELLOW>;
+					function = LED_FUNCTION_LAN;
+					default-state = "keep";
+				};
+
+				led@1 {
+					reg = <1>;
+					color = <LED_COLOR_ID_GREEN>;
+					function = LED_FUNCTION_LAN;
+					default-state = "keep";
+				};
+			};
 		};
 
 		qca8075_2: ethernet-phy@2 {
 			compatible = "ethernet-phy-ieee802.3-c22";
 			reg = <2>;
+
+			leds {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				led@0 {
+					reg = <0>;
+					color = <LED_COLOR_ID_YELLOW>;
+					function = LED_FUNCTION_LAN;
+					default-state = "keep";
+				};
+
+				led@1 {
+					reg = <1>;
+					color = <LED_COLOR_ID_GREEN>;
+					function = LED_FUNCTION_LAN;
+					default-state = "keep";
+				};
+			};
 		};
 
 		qca8075_3: ethernet-phy@3 {
 			compatible = "ethernet-phy-ieee802.3-c22";
 			reg = <3>;
+
+			leds {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				led@0 {
+					reg = <0>;
+					color = <LED_COLOR_ID_YELLOW>;
+					function = LED_FUNCTION_LAN;
+					default-state = "keep";
+				};
+
+				led@1 {
+					reg = <1>;
+					color = <LED_COLOR_ID_GREEN>;
+					function = LED_FUNCTION_LAN;
+					default-state = "keep";
+				};
+			};
 		};
 
 		qca8075_4: ethernet-phy@4 {
 			compatible = "ethernet-phy-ieee802.3-c22";
 			reg = <4>;
+
+			leds {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				led@0 {
+					reg = <0>;
+					color = <LED_COLOR_ID_YELLOW>;
+					function = LED_FUNCTION_WAN;
+					default-state = "keep";
+				};
+
+				led@1 {
+					reg = <1>;
+					color = <LED_COLOR_ID_GREEN>;
+					function = LED_FUNCTION_WAN;
+					default-state = "keep";
+				};
+			};
 		};
 	};
 };
@@ -250,43 +350,39 @@
 
 &dp1 {
 	status = "okay";
-
 	phy-handle = <&qca8075_0>;
-	label = "eth0";
+	label = "lan1";
 };
 
 &dp2 {
 	status = "okay";
-
 	phy-handle = <&qca8075_1>;
-	label = "eth1";
+	label = "lan2";
 };
 
 &dp3 {
 	status = "okay";
-
 	phy-handle = <&qca8075_2>;
-	label = "eth2";
+	label = "lan3";
 };
 
 &dp4 {
 	status = "okay";
-
 	phy-handle = <&qca8075_3>;
-	label = "eth3";
+	label = "lan4";
 };
 
 &dp5 {
 	status = "okay";
-
 	phy-handle = <&qca8075_4>;
-	label = "eth4";
+	label = "wan";
 };
 
 &wifi {
 	status = "okay";
 
 	qcom,ath11k-calibration-variant = "Linksys-MR7350";
+	qcom,ath11k-fw-memory-mode = <2>;
 };
 
 &ssphy_0 {
