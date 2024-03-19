@@ -1,0 +1,20 @@
+From a264d82696428e900cc80665d9aaf70962ce0ebc Mon Sep 17 00:00:00 2001
+From: Sultan Alsawaf <sultan@kerneltoast.com>
+Date: Thu, 26 Mar 2020 17:51:02 -0700
+Subject: [PATCH] arm64: Allow LD_DEAD_CODE_DATA_ELIMINATION to be selected
+
+DCE is not problematic on arm64 and works out of the box. Let it be used.
+
+Signed-off-by: Sultan Alsawaf <sultan@kerneltoast.com>
+
+--- a/arch/arm64/Kconfig	2024-03-19 12:11:44.857797304 +0800
++++ b/arch/arm64/Kconfig	2024-03-19 12:11:56.998556965 +0800
+@@ -193,6 +193,7 @@
+ 	select HAVE_IOREMAP_PROT
+ 	select HAVE_IRQ_TIME_ACCOUNTING
+ 	select HAVE_KVM
++	select HAVE_LD_DEAD_CODE_DATA_ELIMINATION
+ 	select HAVE_NMI
+ 	select HAVE_PERF_EVENTS
+ 	select HAVE_PERF_REGS
+
