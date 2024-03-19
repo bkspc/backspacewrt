@@ -6,9 +6,6 @@ define Device/linksys_mr7350
        BLOCKSIZE := 128k
        PAGESIZE := 2048
        SOC := ipq6018
-	IMAGES += factory.bin
-	IMAGE/factory.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | \
-		append-ubi | linksys-image type=MR7350
        DEVICE_PACKAGES := ipq-wifi-linksys_mr7350 kmod-leds-pca963x
 endef
 TARGET_DEVICES += linksys_mr7350
