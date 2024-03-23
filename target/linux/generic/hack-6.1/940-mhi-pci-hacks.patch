@@ -1,0 +1,64 @@
+Conan
+--- a/drivers/bus/mhi/host/pci_generic.c	2024-03-22 22:01:02.551894000 +0800
++++ b/drivers/bus/mhi/host/pci_generic.c	2024-03-23 12:26:04.948154537 +0800
+@@ -26,6 +26,7 @@
+ /* PCI VID definitions */
+ #define PCI_VENDOR_ID_THALES		0x1269
+ #define PCI_VENDOR_ID_QUECTEL	0x1eac
++#define PCI_VENDOR_ID_TELIT		0x1c5d
+ 
+ /**
+  * struct mhi_pci_dev_info - MHI PCI device specific information
+@@ -240,6 +241,8 @@
+ 	}
+ 
+ static const struct mhi_channel_config modem_qcom_v1_mhi_channels[] = {
++	MHI_CHANNEL_CONFIG_UL(0, "LOOPBACK", 32, 0),
++	MHI_CHANNEL_CONFIG_DL(1, "LOOPBACK", 32, 0),
+ 	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 16, 1),
+ 	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 16, 1),
+ 	MHI_CHANNEL_CONFIG_UL(12, "MBIM", 4, 0),
+@@ -248,6 +251,8 @@
+ 	MHI_CHANNEL_CONFIG_DL(15, "QMI", 4, 0),
+ 	MHI_CHANNEL_CONFIG_UL(20, "IPCR", 8, 0),
+ 	MHI_CHANNEL_CONFIG_DL_AUTOQUEUE(21, "IPCR", 8, 0),
++	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
++	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
+ 	MHI_CHANNEL_CONFIG_UL_FP(34, "FIREHOSE", 32, 0),
+ 	MHI_CHANNEL_CONFIG_DL_FP(35, "FIREHOSE", 32, 0),
+ 	MHI_CHANNEL_CONFIG_UL(46, "IP_SW0", 64, 2),
+@@ -443,9 +448,14 @@
+ static const struct mhi_channel_config mhi_mv3x_channels[] = {
+ 	MHI_CHANNEL_CONFIG_UL(0, "LOOPBACK", 64, 0),
+ 	MHI_CHANNEL_CONFIG_DL(1, "LOOPBACK", 64, 0),
++	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 32, 1),
++	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 32, 1),
+ 	/* MBIM Control Channel */
+ 	MHI_CHANNEL_CONFIG_UL(12, "MBIM", 64, 0),
+ 	MHI_CHANNEL_CONFIG_DL(13, "MBIM", 64, 0),
++
++	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
++	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
+ 	/* MBIM Data Channel */
+ 	MHI_CHANNEL_CONFIG_HW_UL(100, "IP_HW0_MBIM", 512, 2),
+ 	MHI_CHANNEL_CONFIG_HW_DL(101, "IP_HW0_MBIM", 512, 3),
+@@ -645,6 +655,9 @@
+ 	/* DW5930e (sdx55), Non-eSIM, It's also T99W175 */
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_FOXCONN, 0xe0b1),
+ 		.driver_data = (kernel_ulong_t) &mhi_foxconn_sdx55_info },
++	/* Telit FN982m (sdx55), Non-eSIM, It's also T99W175 */
++	{ PCI_DEVICE(PCI_VENDOR_ID_TELIT, 0x1000),
++		.driver_data = (kernel_ulong_t) &mhi_foxconn_sdx55_info },
+ 	/* T99W175 (sdx55), Based on Qualcomm new baseline */
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_FOXCONN, 0xe0bf),
+ 		.driver_data = (kernel_ulong_t) &mhi_foxconn_sdx55_info },
+@@ -678,6 +691,9 @@
+ 	/* MV31-W (Cinterion), based on new baseline */
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_THALES, 0x00b4),
+ 		.driver_data = (kernel_ulong_t) &mhi_mv31_info },
++	/* Unknown (Cinterion) */
++	{ PCI_DEVICE(PCI_VENDOR_ID_THALES, 0x00b8),
++		.driver_data = (kernel_ulong_t) &mhi_mv31_info },
+ 	/* MV32-WA (Cinterion) */
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_THALES, 0x00ba),
+ 		.driver_data = (kernel_ulong_t) &mhi_mv32_info },
