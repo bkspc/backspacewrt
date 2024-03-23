@@ -1,0 +1,107 @@
+--- a/gcc/system.h
++++ b/gcc/system.h
+@@ -194,27 +194,8 @@ extern int fprintf_unlocked (FILE *, const char *, ...);
+ #undef fread_unlocked
+ #undef fwrite_unlocked
+ 
+-/* Include <string> before "safe-ctype.h" to avoid GCC poisoning
+-   the ctype macros through safe-ctype.h */
+-
+-#ifdef __cplusplus
+-#ifdef INCLUDE_STRING
+-# include <string>
+-#endif
+-#endif
+-
+-/* There are an extraordinary number of issues with <ctype.h>.
+-   The last straw is that it varies with the locale.  Use libiberty's
+-   replacement instead.  */
+-#include "safe-ctype.h"
+-
+-#include <sys/types.h>
+-
+-#include <errno.h>
+-
+-#if !defined (errno) && defined (HAVE_DECL_ERRNO) && !HAVE_DECL_ERRNO
+-extern int errno;
+-#endif
++/* Include C++ standard headers before "safe-ctype.h" to avoid GCC
++   poisoning the ctype macros through safe-ctype.h */
+ 
+ #ifdef __cplusplus
+ #if defined (INCLUDE_ALGORITHM) || !defined (HAVE_SWAP_IN_UTILITY)
+@@ -229,6 +210,9 @@ extern int errno;
+ #ifdef INCLUDE_SET
+ # include <set>
+ #endif
++#ifdef INCLUDE_STRING
++# include <string>
++#endif
+ #ifdef INCLUDE_VECTOR
+ # include <vector>
+ #endif
+@@ -245,6 +229,19 @@ extern int errno;
+ # include <type_traits>
+ #endif
+ 
++/* There are an extraordinary number of issues with <ctype.h>.
++   The last straw is that it varies with the locale.  Use libiberty's
++   replacement instead.  */
++#include "safe-ctype.h"
++
++#include <sys/types.h>
++
++#include <errno.h>
++
++#if !defined (errno) && defined (HAVE_DECL_ERRNO) && !HAVE_DECL_ERRNO
++extern int errno;
++#endif
++
+ /* Some of glibc's string inlines cause warnings.  Plus we'd rather
+    rely on (and therefore test) GCC's string builtins.  */
+ #define __NO_STRING_INLINES
+
+diff --git a/libcc1/libcc1plugin.cc b/libcc1/libcc1plugin.cc
+index 72d17c3b81c..e64847466f4 100644
+--- a/libcc1/libcc1plugin.cc
++++ b/libcc1/libcc1plugin.cc
+@@ -32,6 +32,7 @@
+ #undef PACKAGE_VERSION
+ 
+ #define INCLUDE_MEMORY
++#define INCLUDE_VECTOR
+ #include "gcc-plugin.h"
+ #include "system.h"
+ #include "coretypes.h"
+@@ -69,8 +70,6 @@
+ #include "gcc-c-interface.h"
+ #include "context.hh"
+ 
+-#include <vector>
+-
+ using namespace cc1_plugin;
+ 
+ 
+diff --git a/libcc1/libcp1plugin.cc b/libcc1/libcp1plugin.cc
+index 0eff7c68d29..da68c5d0ac1 100644
+--- a/libcc1/libcp1plugin.cc
++++ b/libcc1/libcp1plugin.cc
+@@ -33,6 +33,7 @@
+ #undef PACKAGE_VERSION
+ 
+ #define INCLUDE_MEMORY
++#define INCLUDE_VECTOR
+ #include "gcc-plugin.h"
+ #include "system.h"
+ #include "coretypes.h"
+@@ -71,8 +72,6 @@
+ #include "rpc.hh"
+ #include "context.hh"
+ 
+-#include <vector>
+-
+ using namespace cc1_plugin;
+ 
+ 
+-- 
+2.43.2
