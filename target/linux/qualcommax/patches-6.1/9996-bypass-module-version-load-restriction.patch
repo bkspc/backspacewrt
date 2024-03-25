@@ -1,0 +1,14 @@
+--- a/kernel/module/version.c   2024-03-25 20:21:33.806518135 +0800
++++ b/kernel/module/version.c	2024-03-25 20:23:42.188711299 +0800
+@@ -51,8 +51,8 @@
+ 	return 1;
+ 
+ bad_version:
+-	pr_warn("%s: disagrees about version of symbol %s\n", info->name, symname);
+-	return 0;
++	pr_warn("%s: disagrees about version of symbol %s. (bypassed)\n", info->name, symname);
++	return 1;
+ }
+ 
+ int check_modstruct_version(const struct load_info *info,
+
