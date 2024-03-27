@@ -1,0 +1,20 @@
+mm/slab_common: Align all caches' objects to hardware cachelines
+
+This only increases the memory used by all caches by about 10%, which is
+relatively very little for the performance benefit of cacheline
+alignment.
+
+Signed-off-by: Sultan Alsawaf <sultan@kerneltoast.com>
+--- a/mm/slab_common.c
++++ b/mm/slab_common.c
+@@ -316,6 +316,9 @@
+ 	 */
+ 	flags &= CACHE_CREATE_MASK;
+ 
++	/* Embrace davem */
++	flags |= SLAB_HWCACHE_ALIGN;
++	
+ 	/* Fail closed on bad usersize of useroffset values. */
+ 	if (WARN_ON(!usersize && useroffset) ||
+ 	    WARN_ON(size < usersize || size - usersize < useroffset))
+
