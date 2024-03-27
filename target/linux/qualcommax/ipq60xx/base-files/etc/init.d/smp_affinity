@@ -25,16 +25,6 @@ enable_affinity_ipq60xx() {
 	
 	set_affinity 'xhci-hcd:usb1' 2
 	
-	set_affinity 'ce0' 8
-	set_affinity 'ce1' 8
-	set_affinity 'ce2' 8
-	set_affinity 'ce3' 8
-	set_affinity 'ce5' 8
-	set_affinity 'ce7' 8
-	set_affinity 'ce9' 8
-	set_affinity 'ce10' 8
-	set_affinity 'ce11' 8
-	
 	# do not touuch edma interrupts
 
 }
