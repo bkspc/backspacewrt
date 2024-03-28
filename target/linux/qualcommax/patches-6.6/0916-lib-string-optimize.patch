@@ -1,0 +1,69 @@
+lib/string.c: Optimize memchr()
+
+The original version of memchr() is implemented with the byte-wise
+comparing technique, which does not fully use 64-bits or 32-bits
+registers in CPU. We use word-wide comparing so that 8 characters
+can be compared at the same time on CPU. This code is base on
+David Laight's implementation.
+
+We create two files to measure the performance. The first file
+contains on average 10 characters ahead the target character.
+The second file contains at least 1000 characters ahead the
+target character. Our implementation of “memchr()” is slightly
+better in the first test and nearly 4x faster than the orginal
+implementation in the second test.
+
+Signed-off-by: Yu-Jen Chang <arthurchang09@gmail.com>
+Signed-off-by: Ching-Chun (Jim) Huang <jserv@ccns.ncku.edu.tw>
+---
+ lib/string.c | 28 +++++++++++++++++++++-------
+ 1 file changed, 21 insertions(+), 7 deletions(-)
+
+diff --git a/lib/string.c b/lib/string.c
+index fc5c9d11c302..7f9809748806 100644
+--- a/lib/string.c
++++ b/lib/string.c
+@@ -877,21 +877,35 @@
+ #ifndef __HAVE_ARCH_MEMCHR
+ /**
+  * memchr - Find a character in an area of memory.
+- * @s: The memory area
++ * @p: The memory area
+  * @c: The byte to search for
+- * @n: The size of the area.
++ * @length: The size of the area.
+  *
+  * returns the address of the first occurrence of @c, or %NULL
+  * if @c is not found
+  */
+-void *memchr(const void *s, int c, size_t n)
++void *memchr(const void *p, int c, unsigned long length)
+ {
+-	const unsigned char *p = s;
+-	while (n-- != 0) {
+-        	if ((unsigned char)c == *p++) {
+-			return (void *)(p - 1);
++	u64 mask, val;
++	const void *end = p + length;
++
++	c &= 0xff;
++	if (p <= end - 8) {
++		mask = c;
++		MEMCHR_MASK_GEN(mask);
++
++		for (; p <= end - 8; p += 8) {
++			val = *(u64 *)p ^ mask;
++			if ((val + 0xfefefefefefefeffu) &
++			    (~val & 0x8080808080808080u))
++				break;
+ 		}
+ 	}
++
++	for (; p < end; p++)
++		if (*(unsigned char *)p == c)
++			return (void *)p;
++
+ 	return NULL;
+ }
+ EXPORT_SYMBOL(memchr);
+

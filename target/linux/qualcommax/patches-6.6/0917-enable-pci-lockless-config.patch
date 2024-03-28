@@ -1,0 +1,20 @@
+arm64: Enable PCI_LOCKLESS_CONFIG for ARCH_QCOM
+The pci-msm driver has its own locks, so the generic PCI spin locks are
+unneeded on ARCH_QCOM. Remove them by enabling PCI_LOCKLESS_CONFIG.
+
+Signed-off-by: Sultan Alsawaf <sultan@kerneltoast.com>
+---
+ arch/arm64/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/arch/arm64/Kconfig
++++ b/arch/arm64/Kconfig
+@@ -220,6 +220,7 @@
+ 	select PCI_DOMAINS_GENERIC if PCI
+ 	select PCI_ECAM if (ACPI && PCI)
+ 	select PCI_SYSCALL if PCI
++	select PCI_LOCKLESS_CONFIG if PCI && ARCH_QCOM
+ 	select POWER_RESET
+ 	select POWER_SUPPLY
+ 	select SPARSE_IRQ
+
