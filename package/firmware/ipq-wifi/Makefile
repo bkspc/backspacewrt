@@ -55,6 +55,7 @@ ALLWIFIBOARDS:= \
 	xiaomi_ax9000 \
 	yyets_le1 \
 	yuncore_ax880 \
+	yuncore_fap650 \
 	zte_mf269 \
 	zte_mf287 \
 	zte_mf287plus \
@@ -176,6 +177,7 @@ $(eval $(call generate-ipq-wifi-package,xiaomi_ax3600,Xiaomi AX3600))
 $(eval $(call generate-ipq-wifi-package,xiaomi_ax9000,Xiaomi AX9000))
 $(eval $(call generate-ipq-wifi-package,yyets_le1,YYeTs LE1))
 $(eval $(call generate-ipq-wifi-package,yuncore_ax880,Yuncore AX880))
+$(eval $(call generate-ipq-wifi-package,yuncore_fap650,Yuncore FAP650))
 $(eval $(call generate-ipq-wifi-package,zte_mf269,ZTE MF269))
 $(eval $(call generate-ipq-wifi-package,zte_mf287,ZTE MF287))
 $(eval $(call generate-ipq-wifi-package,zte_mf287plus,ZTE MF287Plus))
