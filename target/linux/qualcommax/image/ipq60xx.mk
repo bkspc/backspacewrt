@@ -1,12 +1,14 @@
 define Device/linksys_mr7350
-       $(call Device/FitImage)
-       $(call Device/UbiFit)
-       DEVICE_VENDOR := Linksys
-       DEVICE_MODEL := MR7350
-       BLOCKSIZE := 128k
-       PAGESIZE := 2048
-       SOC := ipq6018
-       DEVICE_PACKAGES := ipq-wifi-linksys_mr7350 kmod-leds-pca963x
+     $(call Device/FitImage)
+     DEVICE_VENDOR := Linksys
+     DEVICE_MODEL := MR7350
+     BLOCKSIZE := 128k
+     PAGESIZE := 2048
+     SOC := ipq6018
+     KERNEL_SIZE := 8192k
+     IMAGES += factory.bin
+     IMAGE/factory.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | linksys-image type=MR7350
+     DEVICE_PACKAGES := ipq-wifi-linksys_mr7350 kmod-leds-pca963x
 endef
 TARGET_DEVICES += linksys_mr7350
 
