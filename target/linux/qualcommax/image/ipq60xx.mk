@@ -53,4 +53,3 @@ define Device/yuncore_fap650
     IMAGE/factory.ubin := append-ubi | qsdk-ipq-factory-nand
 endef
 TARGET_DEVICES += yuncore_fap650
-
