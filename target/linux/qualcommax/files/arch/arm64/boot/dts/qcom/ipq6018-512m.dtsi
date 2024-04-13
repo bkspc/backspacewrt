@@ -21,3 +21,7 @@
 	reg = <0x0 0x4ab00000 0x0 0x03700000>;
 	no-map;
 };
+
+&wifi {
+	qcom,ath11k-fw-memory-mode = <1>;
+};
