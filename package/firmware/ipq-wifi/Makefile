@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/version.mk
 
 PKG_NAME:=ipq-wifi
-PKG_RELEASE:=2
+PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=https://github.com/bkspc/firmware_qca-wireless.git
@@ -50,12 +50,14 @@ ALLWIFIBOARDS:= \
 	qnap_301w \
 	redmi_ax6 \
 	sony_ncp-hg100-cellular \
+	spectrum_sax1v1k \
 	wallys_dr40x9 \
 	xiaomi_ax3600 \
 	xiaomi_ax9000 \
 	yyets_le1 \
 	yuncore_ax880 \
 	yuncore_fap650 \
+	zbtlink_zbt-z800ax \
 	zte_mf269 \
 	zte_mf287 \
 	zte_mf287plus \
@@ -172,12 +174,14 @@ $(eval $(call generate-ipq-wifi-package,p2w_r619ac,P2W R619AC))
 $(eval $(call generate-ipq-wifi-package,prpl_haze,prpl Haze))
 $(eval $(call generate-ipq-wifi-package,redmi_ax6,Redmi AX6))
 $(eval $(call generate-ipq-wifi-package,sony_ncp-hg100-cellular,Sony NCP-HG100 Cellular))
+$(eval $(call generate-ipq-wifi-package,spectrum_sax1v1k,Spectrum SAX1V1K))
 $(eval $(call generate-ipq-wifi-package,wallys_dr40x9,Wallys DR40X9))
 $(eval $(call generate-ipq-wifi-package,xiaomi_ax3600,Xiaomi AX3600))
 $(eval $(call generate-ipq-wifi-package,xiaomi_ax9000,Xiaomi AX9000))
 $(eval $(call generate-ipq-wifi-package,yyets_le1,YYeTs LE1))
 $(eval $(call generate-ipq-wifi-package,yuncore_ax880,Yuncore AX880))
 $(eval $(call generate-ipq-wifi-package,yuncore_fap650,Yuncore FAP650))
+$(eval $(call generate-ipq-wifi-package,zbtlink_zbt-z800ax,Zbtlink ZBT-Z800AX))
 $(eval $(call generate-ipq-wifi-package,zte_mf269,ZTE MF269))
 $(eval $(call generate-ipq-wifi-package,zte_mf287,ZTE MF287))
 $(eval $(call generate-ipq-wifi-package,zte_mf287plus,ZTE MF287Plus))
