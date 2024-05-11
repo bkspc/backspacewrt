@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
 #include "ipq6018.dtsi"
-#include "ipq6018-thermal.dtsi"
 
 &rpm_msg_ram {
 	reg = <0x0 0x00060000 0x0 0x6000>;
@@ -21,4 +20,8 @@
 &q6_region {
 	reg = <0x0 0x4ab00000 0x0 0x03700000>;
 	no-map;
+};
+
+&wifi {
+	qcom,ath11k-fw-memory-mode = <1>;
 };
