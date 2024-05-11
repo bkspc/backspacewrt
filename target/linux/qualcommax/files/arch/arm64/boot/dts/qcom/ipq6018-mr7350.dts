@@ -34,7 +34,7 @@
 
 	chosen {
 		stdout-path = "serial0:115200n8";
-		bootargs-append = " ubi.block=0,rootfs root=/dev/ubiblock0_0 mitigations=off";
+		bootargs-append = " root=/dev/ubiblock0_0 mitigations=off";
 	};
 
 	keys {
@@ -202,8 +202,6 @@
 &blsp1_uart2 {
 	pinctrl-0 = <&serial_2_pins>;
 	pinctrl-names = "default";
-	dmas = <&blsp_dma 2>, <&blsp_dma 3>;
-	dma-names = "tx", "rx";
 	status = "okay";
 };
 
@@ -272,11 +270,9 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 		reg = <0>;
-		qcom,package-mode = "psgmii";
 
 		qca8075_0: ethernet-phy@0 {
 			compatible = "ethernet-phy-ieee802.3-c22";
-			qcom,package-mode = "psgmii";
 			reg = <0>;
 			gpio-controller;
 			#gpio-cells = <2>;
