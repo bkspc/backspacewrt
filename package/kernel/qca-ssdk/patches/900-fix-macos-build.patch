@@ -1,6 +1,6 @@
 --- a/Makefile
 +++ b/Makefile
-@@ -15,8 +15,8 @@ SUB_LIB=$(subst src/, , $(SUB_DIR))
+@@ -17,8 +17,8 @@ include $(PRJ_PATH)/Makefile.modules
  ####################################################################
  # 			SSDK-Style Makefile
  ####################################################################
@@ -11,17 +11,15 @@
  	make -C $(SYS_PATH) M=$(PRJ_PATH)/temp/ CROSS_COMPILE=$(TOOLPREFIX) modules
  	cp $(PRJ_PATH)/temp/Module.symvers $(PRJ_PATH)/Module.symvers;
  	cp temp/*.ko build/bin;
-@@ -26,8 +26,8 @@ all: $(BIN_DIR) kslib
+@@ -28,7 +28,7 @@ all: $(BIN_DIR) kslib
  ####################################################################
  # 			LNX Modules-Style Makefile
  ####################################################################
 -modules: $(BIN_DIR) kslib_c
--	mkdir -p ./temp/;cp * ./temp -a;cd ./temp;cp ../Makefile.modules ./Makefile;
 +modules: kslib_c $(BIN_DIR)
-+	rm -rf ./temp/;mkdir -p ./temp/;cp * ./temp -a;cd ./temp;cp ../Makefile.modules ./Makefile;
- 	make -C $(SYS_PATH) M=$(PRJ_PATH)/temp $(LNX_MAKEOPTS) modules
- 	cp $(PRJ_PATH)/temp/Module.symvers $(PRJ_PATH)/Module.symvers;
- 	cp temp/*.ko build/bin;
+ 	@$(MAKE) -C $(SYS_PATH) M=$(PRJ_PATH) $(LNX_MAKEOPTS) modules
+ 	@echo "---Build [SSDK-$(VERSION)] at $(BUILD_DATE) finished."
+ 
 --- a/make/target.mk
 +++ b/make/target.mk
 @@ -10,7 +10,9 @@ src_list_loop: src_list
