@@ -1,0 +1,28 @@
+#!/bin/sh /etc/rc.common
+
+START=93
+
+enable_affinity_ipq60xx() {
+	set_affinity() {
+		irq=$(awk "/$1/{ print substr(\$1, 1, length(\$1)-1); exit }" /proc/interrupts)
+		[ -n "$irq" ] && echo $2 > /proc/irq/$irq/smp_affinity
+	}
+
+  set_affinity 'reo2host-destination-ring1' 4
+	set_affinity 'reo2host-destination-ring2' 2
+	set_affinity 'reo2host-destination-ring3' 4
+	set_affinity 'reo2host-destination-ring4' 2
+
+	set_affinity 'wbm2host-tx-completions-ring1' 4
+	set_affinity 'wbm2host-tx-completions-ring2' 2
+	set_affinity 'wbm2host-tx-completions-ring3' 4
+
+	set_affinity 'ppdu-end-interrupts-mac1' 2
+	set_affinity 'ppdu-end-interrupts-mac2' 4
+
+	set_affinity 'xhci-hcd:usb1' 2
+}
+
+boot() {
+	enable_affinity_ipq60xx
+}
