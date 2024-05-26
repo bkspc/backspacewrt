@@ -77,14 +77,15 @@ set ${s}.${id}
 set ${s}.band='${lc(band_name)}'
 set ${s}.channel='${channel}'
 set ${s}.htmode='${htmode}'
-set ${s}.disabled='1'
+set ${s}.disabled='0'
 
 set ${si}=wifi-iface
 set ${si}.device='${name}'
 set ${si}.network='lan'
 set ${si}.mode='ap'
-set ${si}.ssid='OpenWrt'
+set ${si}.ssid='BackspaceWrt'
 set ${si}.encryption='none'
+set ${si}.key='backspace'
 
 `);
 	commit = true;
