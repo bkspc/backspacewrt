@@ -7,6 +7,9 @@ board_config_update
 board=$(board_name)
 
 case "$board" in
+jdc,ax1800-pro)
+    ucidef_set_led_netdev "wan" "WAN" "net_blue" "eth3"
+    ;;
 linksys,mr7350)
 	ucidef_set_led_netdev "lan1-port-activity" "LAN1-PORT-ACTIVITY" "amber:lan1" "lan1" "link tx rx"
 	ucidef_set_led_netdev "lan1-port-link" "LAN1-PORT-LINK" "green:lan1" "lan1" "link_10 link_100 link_1000"
