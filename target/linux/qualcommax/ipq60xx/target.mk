@@ -1,5 +1,4 @@
 SUBTARGET:=ipq60xx
-FEATURES += source-only
 BOARDNAME:=Qualcomm Atheros IPQ60xx
 CPU_TYPE:=cortex-a73
 ARCH_PACKAGES:=aarch64_cortex-a53
