@@ -203,14 +203,15 @@ detect_mac80211() {
 			set wireless.${name}.channel=${channel}
 			set wireless.${name}.band=${mode_band}
 			set wireless.${name}.htmode=$htmode
-			set wireless.${name}.disabled=1
+			set wireless.${name}.disabled=0
 
 			set wireless.default_${name}=wifi-iface
 			set wireless.default_${name}.device=${name}
 			set wireless.default_${name}.network=lan
 			set wireless.default_${name}.mode=ap
-			set wireless.default_${name}.ssid=OpenWrt
-			set wireless.default_${name}.encryption=none
+			set wireless.default_${name}.ssid=BackspaceWrt
+			set wireless.default_${name}.encryption=psk2
+			set wireless.default_${name}.key=backspace
 EOF
 		uci -q commit wireless
 	done
