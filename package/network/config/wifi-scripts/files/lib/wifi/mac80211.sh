@@ -196,7 +196,7 @@ detect_mac80211() {
 				;;
 		esac
 
-		uci -q batch <<-EOF
+		uci -q batch <<EOF
 			set wireless.${name}=wifi-device
 			set wireless.${name}.type=mac80211
 			${dev_id}
